@@ -395,13 +395,13 @@ header {
     padding-block:5px;
     border-radius: 5px;
     border:2px solid #E4E4E4;;
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: white;
  }
  .contact__form form input:not(.contact__form form input[type="checkbox"]) {
     height: 40px;
     border-radius: 5px;
-    -webkit-appearance: none;
-    appearance: none;
-    background-color: white;
  }
  .contact__form form input::placeholder,.contact__form form textarea::placeholder {
     color:black;
