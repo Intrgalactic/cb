@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useWindowSize } from "@uidotdev/usehooks";
 import MobileNavLinkContainer from "./mobileNavLinkContainer";
+import navIcon from 'src/assets/images/nav-icon.png';
 
 const Navigation = () => {
     const windowSize = useWindowSize();
@@ -43,7 +44,7 @@ const Navigation = () => {
         <>
             {isMobile ?
                 <div>
-                    <img src="src/assets/images/nav-icon.png" alt="navigation" className="nav-btn" width="35px" onClick={toggleMobileNav}/>
+                    <img src={navIcon} alt="navigation" className="nav-btn" width="35px" onClick={toggleMobileNav}/>
                     <nav className="mobile-nav" ref={mobileNav}>
                         {navLinks.map((link, index) => (
                             <MobileNavLinkContainer href={link.href} content={link.content} key={index} />

@@ -1,30 +1,34 @@
 import SectionH2 from "src/components/sectionH2";
 import ServiceBox from "./serviceBox";
-
+import camera from "src/assets/images/camera.png"
+import subtitles from 'src/assets/images/subtitles.png'
+import qoutes from 'src/assets/images/quotes.png';
+import microphone from 'src/assets/images/microphone.png'
+import enhance from 'src/assets/images/enhance.png';
 
 const Services = () => {
     const services = [{
-        img:'src/assets/images/camera.png',
+        img:camera,
         heading: "Getting Subtitles from Video ",
         href:"/try-it-out/sfv",
         description: "Easily generate precise subtitles to broaden video content accessibility and engagement",
     },{
-        img:'src/assets/images/subtitles.png',
+        img:subtitles,
         heading:"Adding Subtitles to Video",
         href:"/try-it-out/stv",
         description: "Improve viewer experience with professional, inclusive subtitles"
     },{
-        img: "src/assets/images/quotes.png",
+        img: qoutes,
         href:"/try-it-out/stt",
         heading: "Speech To Text",
         description: "Quickly convert spoken words to text, boosting efficiency in interviews and meetings."
     },{
-        img: "src/assets/images/microphone.png",
+        img: microphone,
         heading: "Text To Speech",
         href:"/try-it-out/tts",
         description: "Turn text into engaging audio with varied voice options for diverse content"
     },{
-        img: 'src/assets/images/enhance.png',
+        img: enhance,
         heading: "Video Enhance",
         href:"/try-it-out/ve",
         description: "Upgrade video clarity and detail effortlessly for various types of footage"
