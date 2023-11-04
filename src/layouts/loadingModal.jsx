@@ -4,7 +4,7 @@ import loader from 'src/assets/images/loader.png';
 const LoadingModal = ({isProcessing}) => {
     const modalRef = useRef();
     useEffect(() => {
-        modalRef.current.classList.toggle('visible-loading-modal');
+        isProcessing ? modalRef.current.classList.add('visible-loading-modal') : modalRef.current.classList.remove('visible-loading-modal') ;
     },[isProcessing])
     return (
         <div className="loading-modal" ref={modalRef}>
