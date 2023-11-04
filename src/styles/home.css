@@ -537,6 +537,10 @@ header {
     header {
         height: 10vh;
     }
+    .mobile-nav {
+        top:10vh;
+        height: 90vh;
+    }
     .hero {
         background-image: url('src/assets/images/hero.jpg');
         height: clamp(700px,90vh,1080px);
@@ -574,15 +578,27 @@ header {
         margin: auto;
         height: 100px;
     }
+    .benefits {
+        flex-direction: row;
+        padding-top: 40px;
+        padding-bottom: 70px;
+        justify-content: space-between;
+    }
+    .benefits__aside {
+        width: 60%;
+        margin-top: 0;
+    }
     .benefits__aside-box {
-        width: 30vw;;
+        width: 20vw;
+        max-width: 400px;
     }
     .benefits img {
-        width: 450px;
+        width: 400px;
         height: auto;
     }
     .benefits__aside-box__p {
         width: 100%;
+        font-size: 0.9em;
     }
     .benefits__aside, .benefits__aside-boxes__container {
         flex-direction: row;
@@ -590,8 +606,11 @@ header {
         justify-content: center;
         column-gap: 50px;
     }
+    .benefits__aside-boxes__container {
+        margin-top:0;
+    }
     .section-h2 {
-        font-size: 3em;
+        font-size: 2.8em;
         width: 70vw;
         margin:auto;
         margin-block:30px;;

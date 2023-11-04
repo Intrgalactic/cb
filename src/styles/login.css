@@ -1,0 +1,20 @@
+
+.login-auth {
+    display: flex;
+    justify-content: center;
+    background-image: url('src/assets/images/mobile-login.png');
+    background-size: cover;
+    background-position: center;
+}
+
+@media screen and (min-width:650px) {
+    .login-auth {
+        background-image: url('src/assets/images/medium-login.png');
+    }
+}
+
+@media screen and (min-width:1024px) {
+    .login-auth {
+        background-image: url('src/assets/images/login.png');
+    }
+}

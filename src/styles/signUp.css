@@ -1,0 +1,58 @@
+.register-auth {
+    background-image: url('src/assets/images/mobile-register.png');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 50px;
+    justify-content: space-between;
+}
+
+.register-benefits {
+    background-color: #09001D;
+    border:2px solid var(--purple);
+    border-radius: 10px;
+    width: 80vw;
+    padding-inline:5%;
+    font-family: NexaHeavy;
+    padding-block: 10px;
+    box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+    text-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+}
+.register-benefits__benefit {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.register-benefits__benefit p {
+    width: 70%;
+    font-size: 0.8em;
+    text-align:end;
+}
+
+@media screen and (min-width:650px) {
+    .register-auth {
+        background-image: url('src/assets/images/medium-register.png');
+    }
+}
+@media screen and (min-width:1024px) {
+    .register-auth {
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding-inline:5%;
+        background-image: url('src/assets/images/register.png');
+    }
+    .auth-form {
+        width: 40vw;
+        max-width: 600px;
+    }
+    .register-benefits {
+        width: 30vw;
+        padding-block:30px;
+        max-width: 600px;
+    }
+    .register-benefits__benefit {
+        margin-block:10px;
+    }
+}
