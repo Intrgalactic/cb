@@ -26,7 +26,7 @@ export const processGoogleAuth = (setIsProcessing,navigate,errDispatch) => {
             }   
         }).catch((error) => {
             console.log(error);
-            errDispatch({ type: "validateErr", payload: { err: error } });
+            errDispatch({ type: "validateErr", payload: { err: error.message } });
         }).finally(() => {
             setIsProcessing(false); 
         });
