@@ -10,8 +10,10 @@ import { getBackgroundOnSizeChange, loadBackgrounds } from 'src/utilities/assets
 import mobileChoosePackage from 'src/assets/images/mobile-choose-package.jpg';
 import mediumChoosePackage from 'src/assets/images/medium-choose-package.jpg';
 import fullChoosePackage from 'src/assets/images/choose-package.jpg';
+import VideoServicePreviewSection from 'src/layouts/choosePackage/videoServicePreviewSection';
+import AudioServicePreviewSection from 'src/layouts/choosePackage/audioServicePreviewSection';
 
-const backgrounds = [mobileChoosePackage, mediumChoosePackage, fullChoosePackage];
+const backgrounds = [[mobileChoosePackage], [mediumChoosePackage], [fullChoosePackage]];
 
 const ChoosePackage = () => {
     const [backgroundsLoaded, setBackgroundsLoaded] = useState(false);
@@ -37,6 +39,8 @@ const ChoosePackage = () => {
                 <>
                     <Header />
                     <Hero />
+                    <VideoServicePreviewSection/>
+                    <AudioServicePreviewSection/>
                     <Footer />
                 </> :
                 <LoadingModal isLoading={true} />

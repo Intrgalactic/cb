@@ -18,9 +18,11 @@
   @font-face {
     font-family: NexaHeavy;
     src: url('src/assets/fonts/NexaHeavy.otf');
+    font-display: swap;
   }
   @font-face {
     font-family: NexaRegular;
+    font-display: swap;
     src: url('src/assets/fonts/NexaRegular.otf');
   }
   body {

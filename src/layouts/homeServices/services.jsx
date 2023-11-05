@@ -11,25 +11,29 @@ const Services = () => {
         img:camera,
         heading: "Getting Subtitles from Video ",
         href:"/try-it-out/sfv",
+        alt: "camera",
         description: "Easily generate precise subtitles to broaden video content accessibility and engagement",
     },{
         img:subtitles,
         heading:"Adding Subtitles to Video",
         href:"/try-it-out/stv",
+        alt: "subtitles",
         description: "Improve viewer experience with professional, inclusive subtitles"
     },{
         img: qoutes,
         href:"/try-it-out/stt",
-        heading: "Speech To Text",
+        heading: "quotes",
         description: "Quickly convert spoken words to text, boosting efficiency in interviews and meetings."
     },{
         img: microphone,
         heading: "Text To Speech",
+        alt:"microphone",
         href:"/try-it-out/tts",
         description: "Turn text into engaging audio with varied voice options for diverse content"
     },{
         img: enhance,
         heading: "Video Enhance",
+        alt: "video",
         href:"/try-it-out/ve",
         description: "Upgrade video clarity and detail effortlessly for various types of footage"
     }]
