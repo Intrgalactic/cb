@@ -2,7 +2,7 @@ import { useContext, useEffect } from "react";
 import { AuthContext } from "src/context/authContext";
 import Header from "src/layouts/header/header";
 import { useNavigate } from "react-router-dom";
-import RegisterAuth from "src/layouts/registerAuth";
+import RegisterAuth from "src/layouts/register/registerAuth";
 import 'src/styles/root.css';
 import 'src/styles/auth.css';
 import 'src/styles/signUp.css';

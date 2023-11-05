@@ -7,6 +7,7 @@ import Home from "./pages/home"
 import { auth } from "../firebase"
 import Login from "./pages/login"
 import { AxiosFacade } from "./lib/axios"
+import ChoosePackage from "./pages/choosePackage"
 
 const router = createBrowserRouter([
     {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
     {
         path: "/login",
         element: <Login/>
+    },
+    {
+        path: "/choose-package",
+        element: <ChoosePackage/>
     }
 ])
 

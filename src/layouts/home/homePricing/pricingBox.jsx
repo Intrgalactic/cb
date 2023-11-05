@@ -1,10 +1,13 @@
 import pricingCheck from 'src/assets/images/pricing-check.png';
 import scrollDown from 'src/assets/images/scroll-down.png';
 
-const PricingBox = ({ heading, price, items, description,href,btn }) => {
+const PricingBox = ({ heading, price, items, description, href, btn, src,alt,isLogged }) => {
     return (
         <article className="pricing__box">
-            <h3>{heading}</h3>
+            <div className='pricing__box-heading'>
+                <img src={src} alt={alt}  height="30px"/>
+                <h3>{heading}</h3>
+            </div>
             <p className="pricing__box-description">{description}</p>
             <div className="pricing__box-pricing">
                 <p><span>{price}</span> / Month</p>
@@ -22,7 +25,7 @@ const PricingBox = ({ heading, price, items, description,href,btn }) => {
                 <img src={scrollDown} width="35px" />
                 <p>Scroll To See More</p>
             </div>
-            <button className="pricing__box-btn" onClick={() => {window.open(`${href}`,"_blank")}}>{btn}</button>        
+            <button className="pricing__box-btn" onClick={() => { window.open(`${href}`, "_blank") }}>{!isLogged ? "Buy" : btn}</button>
         </article>
     )
 }

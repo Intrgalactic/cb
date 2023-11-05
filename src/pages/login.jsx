@@ -3,7 +3,7 @@ import Header from "src/layouts/header/header";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import Footer from "src/layouts/footer/footer";
-import LoginAuth from "src/layouts/loginAuth";
+import LoginAuth from "src/layouts/login/loginAuth";
 import { AuthContext } from "src/context/authContext";
 import 'src/styles/login.css';
 
@@ -12,7 +12,7 @@ const Login = () => {
     const navigate = useNavigate();
     useEffect(() => {
         if (user) {
-            navigate('/dashboard');
+           
         }
     })
     return (

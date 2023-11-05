@@ -10,7 +10,7 @@ const config = {
 export const AxiosFacade = {
     getUser: async (email,getJwtToken) => {
         var user;
-        user = await axios.post(`${process.env.EXPO_PUBLIC_SERVICES_FETCH_URL}get-user`,{
+        user = await axios.post(`${import.meta.env.VITE_SERVER_FETCH_URL}get-user`,{
             email: email.toLowerCase(),
             getToken:getJwtToken,
             web:true
@@ -49,7 +49,7 @@ export const AxiosFacade = {
             emailChanged: false,
             web:true
         }
-        return await postFetchDB('create-user',body,201,true);
+        return await postFetchDB('create-user',body,201,false);
     },
     deleteUser: async (email, password) => {
         const body = {

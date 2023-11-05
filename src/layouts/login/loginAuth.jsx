@@ -1,17 +1,19 @@
 import { useEffect, useReducer, useRef, useState } from "react";
-import AuthForm from "./forms/authForm";
-import AuthInput from "./forms/authInput";
+import AuthForm from "../forms/authForm";
+import AuthInput from "../forms/authInput";
 import ValidateErr from "src/components/validateError";
 import { errInitialState, errReducer, getValidateErrors, validateFormInputs } from "src/utilities/auth";
+import { processGoogleAuth } from "src/utilities/thidPartyAuth";
+import { useNavigate } from "react-router-dom";
+import LoadingModal from "../loadingModal";
 
 const LoginAuth = () => {
-    const googleAction = () => {
-
-    }
+    const navigate = useNavigate();
     const appleAction = () => {
 
     }
     const [errState,errDispatch] = useReducer(errReducer,errInitialState);
+    const [isProcessing,setIsProcessing] = useState(false);
     const errRef = useRef();
     const emailRef = useRef("");
     const passwordRef = useRef("");
@@ -42,6 +44,9 @@ const LoginAuth = () => {
             errDispatch({type:"err",payload:false})
         }
     },[errState.validateErr]);
+    const googleAction = () => {
+        processGoogleAuth(setIsProcessing,navigate,errDispatch);
+    }
     return (
         <>
             <ValidateErr ref={errRef} err={errState.err}/>
@@ -52,6 +57,7 @@ const LoginAuth = () => {
                     ))}
                 </AuthForm>
             </section>
+            <LoadingModal isProcessing={isProcessing}/>
         </>
     )
 
