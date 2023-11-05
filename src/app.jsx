@@ -8,6 +8,8 @@ import { auth } from "../firebase"
 import Login from "./pages/login"
 import { AxiosFacade } from "./lib/axios"
 import ChoosePackage from "./pages/choosePackage"
+import FontFaceObserver from "fontfaceobserver"
+import LoadingModal from "./layouts/loadingModal"
 
 const router = createBrowserRouter([
     {
@@ -20,37 +22,51 @@ const router = createBrowserRouter([
     },
     {
         path: "/login",
-        element: <Login/>
+        element: <Login />
     },
     {
         path: "/choose-package",
-        element: <ChoosePackage/>
+        element: <ChoosePackage />
     }
 ])
 
 const App = () => {
     const [currentUser, setCurrentUser] = useState();
+    const [assetsLoaded, setAssetsLoaded] = useState(false);
+    
     useEffect(() => {
-        if (currentUser) {
-            AxiosFacade.getJwtToken().then((authenticated) => {
-                if (!authenticated) {
+        const fontA = new FontFaceObserver('NexaRegular');
+        const fontB = new FontFaceObserver('NexaHeavy');
+        Promise.all([fontA.load(), fontB.load()]).then(() => {
+            if (currentUser) {
+                AxiosFacade.getJwtToken().then((authenticated) => {
+                    if (!authenticated) {
+                        setCurrentUser(false);
+                    }
+                    setAssetsLoaded(true);
+                })
+
+            }
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    setCurrentUser(user);
+                }
+                else {
                     setCurrentUser(false);
                 }
+                setAssetsLoaded(true);
             })
-        }
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                setCurrentUser(user);
-            }
-            else {
-                setCurrentUser(false);
-            }
-        })
-    },[]);
- 
+        }).catch(() => {
+            setAssetsLoaded(true);
+        });
+    }, []);
+
     return (
         <AuthContext.Provider value={currentUser}>
-            <RouterProvider router={router} />
+            {assetsLoaded ?
+                <RouterProvider router={router} /> :
+                <LoadingModal isLoading={true} />
+            }
         </AuthContext.Provider>
     )
 }

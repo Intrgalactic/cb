@@ -479,6 +479,9 @@ header {
     .service-box__p {
         font-size: 0.75em;
     }
+    .benefits {
+        background-image: url('src/assets/images/medium-benefits.jpg');
+    }
     .benefits__aside-box__p {
         font-size: 0.9em;
     }
@@ -584,7 +587,8 @@ header {
     }
     .benefits {
         flex-direction: row;
-        padding-top: 40px;
+        padding-top: 40px; 
+        background-image: url('src/assets/images/benefits.jpg');
         padding-bottom: 70px;
         justify-content: space-between;
     }
