@@ -10,6 +10,7 @@ import { AxiosFacade } from "./lib/axios"
 import ChoosePackage from "./pages/choosePackage"
 import FontFaceObserver from "fontfaceobserver"
 import LoadingModal from "./layouts/loadingModal"
+import { UserSubscriptionContext } from "./context/userSubscriptionContext"
 
 const router = createBrowserRouter([
     {
@@ -33,7 +34,7 @@ const router = createBrowserRouter([
 const App = () => {
     const [currentUser, setCurrentUser] = useState();
     const [assetsLoaded, setAssetsLoaded] = useState(false);
-    
+    const [isPaying, setIsPaying] = useState();
     useEffect(() => {
         const fontA = new FontFaceObserver('NexaRegular');
         const fontB = new FontFaceObserver('NexaHeavy');
@@ -47,11 +48,19 @@ const App = () => {
                 })
 
             }
-            onAuthStateChanged(auth, (user) => {
+            onAuthStateChanged(auth, async (user) => {
                 if (user) {
+                    const dbUser = await AxiosFacade.getUser(user.email, false);
+                    if (dbUser.isPaying === "true") {
+                        setIsPaying(true);
+                    }
+                    else {
+                        setIsPaying(false);
+                    }
                     setCurrentUser(user);
                 }
                 else {
+                    setIsPaying(false);
                     setCurrentUser(false);
                 }
                 setAssetsLoaded(true);
@@ -63,10 +72,12 @@ const App = () => {
 
     return (
         <AuthContext.Provider value={currentUser}>
-            {assetsLoaded ?
-                <RouterProvider router={router} /> :
-                <LoadingModal isLoading={true} />
-            }
+            <UserSubscriptionContext.Provider value={isPaying}>
+                {assetsLoaded ?
+                    <RouterProvider router={router} /> :
+                    <LoadingModal isLoading={true} />
+                }
+            </UserSubscriptionContext.Provider>
         </AuthContext.Provider>
     )
 }

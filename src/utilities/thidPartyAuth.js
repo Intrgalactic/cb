@@ -1,8 +1,8 @@
-import { GoogleAuthProvider, getAdditionalUserInfo, getAuth, signInWithPopup } from "firebase/auth";
+import { getAdditionalUserInfo, getAuth, signInWithPopup } from "firebase/auth";
 import { AxiosFacade } from "src/lib/axios";
+import { FirebaseFacade } from "src/lib/firebase";
 
-export const processGoogleAuth = (setIsProcessing,navigate,errDispatch) => {
-    const provider = new GoogleAuthProvider();
+export const processThirdPartyAuth = (setIsProcessing,navigate,errDispatch,provider) => {
     const auth = getAuth();
 
     signInWithPopup(auth, provider)
@@ -17,7 +17,7 @@ export const processGoogleAuth = (setIsProcessing,navigate,errDispatch) => {
             }
             else {
                 const dbUser = await AxiosFacade.getUser(user.email,true);
-                if (dbUser.isPaying) {
+                if (dbUser.isPaying === 'true') {
                     navigate('/dashboard');
                 }
                 else {
@@ -25,8 +25,8 @@ export const processGoogleAuth = (setIsProcessing,navigate,errDispatch) => {
                 }
             }   
         }).catch((error) => {
-            console.log(error);
-            errDispatch({ type: "validateErr", payload: { err: error.message } });
+            const msg = FirebaseFacade.getErrorMessage(error.message);
+            errDispatch({ type: "validateErr", payload: { err: msg } });
         }).finally(() => {
             setIsProcessing(false); 
         });

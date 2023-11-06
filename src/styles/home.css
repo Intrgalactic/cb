@@ -213,7 +213,7 @@ header {
 .service-box__btn:after {
     width: 100%;
     height: 10%;
-    z-index: 999;
+    z-index: 998;
     background-color: #2A036B;
     filter:blur(5px);
     box-shadow: 0px 0px 20px purple;
@@ -295,6 +295,7 @@ header {
     align-items: center;
     gap:30px;
 }
+
 .pricing__box-heading img {
     height: 1.7em;
 }
@@ -310,6 +311,13 @@ header {
     text-align: right;
     font-family: NexaRegular;
     align-items: center;
+}
+.pricing__box-item img {
+    filter: drop-shadow(5px 0px 7px rgba(173, 0, 255,0.5));
+}
+.pricing__box-item p span {
+    color:#AD00FF;
+    font-family: NexaHeavy;
 }
 .pricing__box-pricing,.pricing__box-description {
     font-family: NexaRegular;
@@ -371,7 +379,7 @@ header {
     padding-block: 40px;
     color:white;
     background-image: url('src/assets/images/mobile-contact.jpg');
-    background-size: 120% 100%;
+    background-size:140% 101%;
 }
 .contact__info {
     width: 90%;
@@ -531,7 +539,7 @@ header {
     }
     .contact {
         background-image: url('src/assets/images/medium-contact.jpg');
-        background-size: cover;
+        background-size: 100% 101%;
     }
     .footer__links-category {
         display: flex;
@@ -545,7 +553,7 @@ header {
 
 @media screen and (min-width:1024px) {
     header {
-        height: 10vh;
+        height: clamp(80px,10vh,140px);
     }
     .mobile-nav {
         top:10vh;
@@ -645,6 +653,7 @@ header {
     .pricing__pricing-items__container {
         column-gap: 5vw;
         width: 90vw;
+        max-width: 1920px;
     }
     .contact__info {
         width: 40%;

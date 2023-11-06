@@ -69,6 +69,9 @@ body {
     border:2px solid var(--purple);
     color:white;
 }
+.wrong-auth-input {
+    border:2px solid #5F0101;
+}
 .auth-input,.auth-btn,.auth-form__form-btn,.auth-form {
     box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
 }
@@ -80,6 +83,11 @@ body {
 .auth-label__text {
     margin:0;
     margin-bottom: 10px;
+}
+.action-btns__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 .auth-form__form-btn {
     -webkit-appearance: none;

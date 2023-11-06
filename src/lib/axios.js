@@ -44,8 +44,7 @@ export const AxiosFacade = {
             name: name,
             userName: userName,
             email: email.toLowerCase(),
-            isPaying: true,
-            isNew: true,
+            isPaying: false,
             emailChanged: false,
             web:true
         }

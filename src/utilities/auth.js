@@ -1,3 +1,4 @@
+import { getAuth } from "firebase/auth";
 
 export const errInitialState = {
     validateErr: false,
@@ -78,4 +79,16 @@ export function validateFormInputs(formInputs) {
         isValid,
         errors
     };
+}
+
+export const redirectOnAuth = (rejectRoute,authRoute,navigate) => {
+    const auth = getAuth();
+    if (auth.currentUser === null) {
+        if (rejectRoute) {
+            navigate(rejectRoute);
+        }
+    }
+    else {
+        navigate(authRoute);
+    }
 }

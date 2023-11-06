@@ -1,4 +1,4 @@
-import { updateEmail, updatePassword } from "firebase/auth";
+import { getAuth, signOut, updateEmail, updatePassword } from "firebase/auth";
 import { AxiosFacade } from "./axios";
 
 export const FirebaseFacade = {
@@ -24,5 +24,17 @@ export const FirebaseFacade = {
         }).catch(err => {
             throw err;
         })
+    },
+    logoutUser: () => {
+        const auth = getAuth();
+        signOut(auth);
+    },
+    getErrorMessage: (err) => {
+        switch(err) {
+            case "Firebase: Error (auth/email-already-in-use).": return "Email Is Already In Use";
+            case "Firebase: Error (auth/wrong-password).": return "Wrong Password";
+            case "Firebase: Error (auth/user-not-found).": return "User Not Found";
+            case "Firebase: Error (auth/cancelled-popup-request).": return "User Closed The Popup";
+        }
     }
 }

@@ -6,9 +6,10 @@ import ValidateErr from "src/components/validateError"
 import LoadingModal from "../loadingModal"
 import { errInitialState, errReducer, getValidateErrors, validateFormInputs } from "src/utilities/auth"
 import { AxiosFacade } from "src/lib/axios"
-import { createUserWithEmailAndPassword, getAuth, } from "firebase/auth"
+import { GoogleAuthProvider, OAuthProvider, createUserWithEmailAndPassword, getAuth, } from "firebase/auth"
 import { useNavigate } from "react-router-dom"
-import { processGoogleAuth } from "src/utilities/thidPartyAuth"
+import { processThirdPartyAuth } from "src/utilities/thidPartyAuth"
+import { FirebaseFacade } from "src/lib/firebase"
 
 const RegisterAuth = () => {
 
@@ -16,7 +17,10 @@ const RegisterAuth = () => {
     const auth = getAuth();
     const navigate = useNavigate();
     const appleAction = () => {
-
+        const provider = new OAuthProvider('apple.com');
+        provider.addScope('email');
+        provider.addScope('name');
+        processThirdPartyAuth(setIsProcessing, navigate, errDispatch, provider);
     }
     const registerAccount = () => {
         const formValidity = validateFormInputs(formInputs);
@@ -27,10 +31,11 @@ const RegisterAuth = () => {
                     navigate('/choose-package');
                     setIsProcessing(false);
                 }).catch(err => {
-                    console.log(err);
+                    throwAndUnload({ error: err });
                 })
             }).catch(err => {
-                console.log(err);
+                const errMsg = FirebaseFacade.getErrorMessage(err.message);
+                throwAndUnload({ error: errMsg });
             })
         }
         else {
@@ -71,13 +76,18 @@ const RegisterAuth = () => {
         }
     }, [errState.validateErr]);
     const googleAction = () => {
-        processGoogleAuth(setIsProcessing,navigate,errDispatch);
+        const provider = new GoogleAuthProvider();
+        processThirdPartyAuth(setIsProcessing, navigate, errDispatch, provider);
+    }
+    const throwAndUnload = (err) => {
+        setIsProcessing(false);
+        errDispatch({ type: "validateErr", payload: err })
     }
     return (
         <>
             <ValidateErr ref={errRef} err={errState.err} />
             <section className="auth register-auth">
-                <AuthForm blocked={errState.blocked} action={registerAccount} heading="Create An Account" btnText="Join" gAction={googleAction} aAction={appleAction} authType="register">
+                <AuthForm blocked={errState.blocked} hasScndBtn={false} action={registerAccount} heading="Create An Account" btnText="Join" gAction={googleAction} aAction={appleAction} authType="register">
                     {formInputs.map((input, index) => (
                         <AuthInput label={input.label} ref={input.ref} type={input.type} key={index} />
                     ))}

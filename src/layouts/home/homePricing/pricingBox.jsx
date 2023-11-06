@@ -1,11 +1,11 @@
 import pricingCheck from 'src/assets/images/pricing-check.png';
 import scrollDown from 'src/assets/images/scroll-down.png';
 
-const PricingBox = ({ heading, price, items, description, href, btn, src,alt,isLogged }) => {
+const PricingBox = ({ heading, price, items, description, href, btn, src, alt, isLogged }) => {
     return (
         <article className="pricing__box">
             <div className='pricing__box-heading'>
-                <img src={src} alt={alt}  height="30px"/>
+                <img src={src} alt={alt} height="30px" />
                 <h3>{heading}</h3>
             </div>
             <p className="pricing__box-description">{description}</p>
@@ -17,7 +17,9 @@ const PricingBox = ({ heading, price, items, description, href, btn, src,alt,isL
                 {items.map((item, index) => (
                     <div className="pricing__box-item" key={index}>
                         <img src={pricingCheck} width="35px" height="26.83px" />
-                        <p>{item}</p>
+                        {typeof (item) === "string" ? <p>{item}</p> :
+                            <p>{item[0]} <span>{item[1]}</span> {item[2]}</p>
+                        }
                     </div>
                 ))}
             </div>
