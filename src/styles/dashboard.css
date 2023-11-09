@@ -1,0 +1,191 @@
+
+.dashboard {
+    background-image: url('src/assets/images/mobile-dashboard.png');
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+}
+.dashboard__mobile-nav {
+    display: flex;
+    position: fixed;
+    width: calc(90vw - 60px);
+    top:30px;
+    left:5%;
+    column-gap:20px;
+    background-color:#0A001F ;
+    box-shadow: 0px 4px 20px rgba(0,0,0,0.5);
+    align-items: center;
+    justify-content: space-between;
+    padding-inline:30px;
+    height: 80px;
+    border-radius: 40px;
+}
+.mobile-nav__mobile-lap::-webkit-scrollbar {
+    display: none;
+}
+.mobile-nav__mobile-lap {
+    width: 70%;
+    overflow-x: scroll;
+    display: flex;
+    justify-content: center;
+    column-gap: 20px;
+    padding-block:20px;
+    scrollbar-width: none;
+}
+.dashboard__mobile-nav__outer-img {
+    height: 30px;
+}
+.mobile-nav-link img {
+    height: 20px;
+}
+.dashboard__mobile-nav img {
+    width: auto;
+}
+.mobile-nav-link {
+    padding:10px;
+    border-radius: 50%;
+    width: 30px;
+    min-width: 30px;
+    height: 30px;
+    border:2px solid #2C233E;
+    box-shadow: 0px 4px 4px rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0,0,0,0.3);
+}
+.mobile-nav-link__inner-links {
+    position: absolute;
+    bottom:-120px;
+    background-color: #0A001F;
+    width: 90%;
+    transform: translateY(-400px);
+    min-height: 50px;
+    padding-block:10px;
+    box-shadow: 0px 4px 20px rgba(0,0,0,0.25);
+    border-radius: 40px;
+    align-items: center;
+    column-gap: 20px;
+    padding-inline:5%;
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 20px;
+    justify-content: space-around;
+    flex-direction: row;
+    transition-duration: 300ms;
+    transition-timing-function: ease-in-out;
+    left:0;
+}
+.visible-mobile-nav-link__inner-links {
+    transform: translateY(0);
+}
+.nav-links__inner-links__item {
+    display: flex;
+    align-items: center;
+    column-gap: 30px;
+}
+.nav-links__inner-links__item a {
+    font-family: NexaHeavy;
+    color:white;
+    text-decoration: none;
+}
+@media screen and (min-width:650px) {
+    .dashboard {
+        background-image: url('src/assets/images/medium-dashboard.png');
+    }
+}
+
+@media screen and (min-width:1024px) {
+    .dashboard {
+        background-image: url('src/assets/images/dashboard.png');
+    }
+    .desktop-nav-logo {
+        height: auto;
+        max-width: 80%;
+    }
+    .dashboard__desktop-nav__logo-container {
+        height: 10%;
+        width: 100%;
+    }
+    .dashboard__desktop-nav {
+        position: fixed;
+        display:flex;
+        align-items: center;
+        flex-direction: column;
+        row-gap:20px;
+        background-color: #0A001F;
+        min-height: 100vh;
+        width: clamp(200px,20vw,500px);
+        filter: drop-shadow(0px 4px 5px rgba(255,255,255,0.25));
+        padding-top:30px;
+        border-right: 2px solid #2C233E;
+        padding-inline:20px;
+    }
+    .desktop-nav__desktop-lap {
+        width: 100%;
+    }
+    .desktop-nav-link {
+        min-height: 40px;
+        position: relative;
+        margin-block:50px;
+    }
+    .desktop-nav-link:after {
+        bottom:0;
+        width: 100%;
+        height: 3px;
+        background-color: #2C233E;
+        border-radius: 20px;
+        filter: drop-shadow(0px 4px 5px rgba(255,255,255,0.25));
+        content: '';
+        left:0;
+        position: absolute;
+        transition-duration: 200ms;
+    }
+    .desktop-nav-link:hover {
+        cursor: pointer;
+    }
+    .desktop-nav-link a,.desktop-nav-link p {
+        font-family: NexaHeavy;
+        color:white;
+        text-decoration: none;
+    }
+    .nav-link__inner-links {
+        max-height: 0px;
+        display: flex;
+        overflow-y: hidden;
+        margin-block:20px;
+        scrollbar-width: none;
+        flex-direction: column;
+        gap:20px;
+        transition-duration: 200ms;
+        transition-timing-function: ease-in-out;
+    }
+    .visible-nav-link:after {
+        bottom: -20px;
+    }
+    .visible-desktop-nav-link__inner-links {
+        max-height: 400px;
+    }
+    .desktop-nav-link__inner-links-img {
+        width: auto;
+        height: 20px;
+    }
+    .nav-links__inner-links__item {
+        display: flex;
+        justify-content: space-between;
+    }
+    .desktop-nav-link__list {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .desktop-nav-link__list img {
+        width: auto;
+        transition-duration: 200ms;
+        height: 15px;
+    }
+    .rotated-list-arrow {
+        transform: rotate(180deg);
+    }
+    
+}

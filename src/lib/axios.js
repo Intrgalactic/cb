@@ -72,6 +72,20 @@ export const AxiosFacade = {
         }).catch(() => {
             return false;
         })
+    },
+    requestUserPasswordReset: async (email,) => {
+        const body = {
+            email:email
+        }
+        return await postFetchDB('api/request-user-password-reset',body,200,false);
+    },
+    resetUserPassword: async (email,code,newPassword) => {
+        const body = {
+            email: email,
+            newPassword:newPassword,
+            code: code
+        }
+        return await postFetchDB("api/reset-user-password",body,200,false);
     }
 
 }

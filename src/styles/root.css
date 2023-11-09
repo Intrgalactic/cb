@@ -68,6 +68,35 @@
       transform: rotate(360deg);
     }
   }
+  .btn-loader {
+    animation-name: btn-loader;
+    animation-duration: 2s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    width: 30px;
+    height: 30px;
+  }
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type=number] {
+    appearance: textfield;
+    -moz-appearance: textfield;
+  }
+  @keyframes btn-loader {
+    0% {
+      transform: rotate(0deg);
+    }
+    50% {
+      transform: rotate(180deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
   h1,h2,h3,h4,h5,p {
     padding:0;
   }

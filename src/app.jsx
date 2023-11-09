@@ -11,6 +11,7 @@ import ChoosePackage from "./pages/choosePackage"
 import FontFaceObserver from "fontfaceobserver"
 import LoadingModal from "./layouts/loadingModal"
 import { UserSubscriptionContext } from "./context/userSubscriptionContext"
+import Dashboard from "./pages/dashboard/dashboard"
 
 const router = createBrowserRouter([
     {
@@ -28,6 +29,15 @@ const router = createBrowserRouter([
     {
         path: "/choose-package",
         element: <ChoosePackage />
+    },
+    {
+        path: "/dashboard",
+        element: <Dashboard/>,
+        children:[
+            {
+                
+            }
+        ]
     }
 ])
 
@@ -46,7 +56,7 @@ const App = () => {
                     }
                     setAssetsLoaded(true);
                 })
-
+                console.log('triege');
             }
             onAuthStateChanged(auth, async (user) => {
                 if (user) {

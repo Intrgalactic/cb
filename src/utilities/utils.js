@@ -1,6 +1,13 @@
 import microphone from 'src/assets/images/microphone.png';
 import quotes from 'src/assets/images/quotes.png';
 import video from 'src/assets/images/enhance.png';
+import homeIcon from 'src/assets/images/icons/home.png';
+import dashboardIcon from 'src/assets/images/icons/dashboard.png';
+import microphoneIcon from 'src/assets/images/icons/microphone.png';
+import videoIcon from 'src/assets/images/icons/video.png';
+import settingsIcon from 'src/assets/images/icons/settings.png';
+import camera from 'src/assets/images/camera.png';
+import subtitles from 'src/assets/images/subtitles.png';
 
 export const pricingItems = [{
     heading: "Starter",
@@ -43,7 +50,7 @@ export const pricingItems = [{
     src: video,
     alt: "video",
     href: "/checkout?package=professional",
-    description: "Amplify Your Work: Unleash Potential with Our AI-Enhanced Pro Toolkit",
+    description: "Amplify Your Projects: Transform Your Creations with Our AI-Enhanced Professional Toolkit",
     items: [
         ["Text to Speech: Up To", "100,000", "words per month"],
         ["Speech to Text: Up To", "25", "hours of audio per month"],
@@ -58,3 +65,55 @@ export const pricingItems = [{
         "Instant Personal Support"
       ]
 }]
+
+export const dashboardNavLinks = [
+    {
+        name: "Home",
+        img: homeIcon,
+        link: "/"
+    },
+    {
+        name: "Dashboard",
+        img: dashboardIcon,
+        link: "/dashboard"
+    },
+    {
+        name: "Talk & Text",
+        img: microphoneIcon,
+        menu: [{
+            name:"Text To Speech",
+            link: "/dashboard/services/text-to-speech",
+            alt: "text to speech",
+            img: microphone,
+        },
+        {
+            name:"Speech To Text",
+            link: "/dashboard/services/speech-to-text",
+            alt: "speech to text",
+            img: quotes
+        }]
+    },
+    {
+        name: "Videos",
+        img: videoIcon,
+        menu: [
+            {
+                name:"Subtitles To Video",
+                link: "/dashboard/services/subtitles-to-video",
+                alt: "subtitles to video",
+                img: subtitles
+            },
+            {
+                name:"Subtitles From Video",
+                link: "/dashboard/services/subtitles-from-video",
+                alt: "subtitles from video",
+                img: camera
+            }
+        ],
+    },
+    {   
+        name: "Settings",
+        img: settingsIcon,
+        link: "/dashboard/settings"
+    },
+];

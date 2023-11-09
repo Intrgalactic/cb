@@ -1,4 +1,5 @@
 import { getAuth } from "firebase/auth";
+import { AxiosFacade } from "src/lib/axios";
 
 export const errInitialState = {
     validateErr: false,
@@ -6,28 +7,39 @@ export const errInitialState = {
     blocked: false,
 }
 
-export const errReducer = (state,action) => {
+export const errReducer = (state, action) => {
     for (const key of Object.keys(errInitialState)) {
         console.log(key);
         if (key === action.type) {
-            return {...state,[key]:action.payload};
+            return { ...state, [key]: action.payload };
         }
     }
 }
 
-export const getValidateErrors = (errState,errDispatch,errRef) => {
+export const getValidateErrors = (errState, errDispatch, errRef) => {
     const errKey = Object.keys(errState.validateErr)[0];
     const err = errState.validateErr[errKey];
     errRef.current.classList.add('visible-validate-err');
-    errDispatch({type:"err",payload:err})
-    errDispatch({type:"blocked",payload:true});
+    errDispatch({ type: "err", payload: err })
+    errDispatch({ type: "blocked", payload: true });
     setTimeout(() => {
-        errDispatch({type:"blocked",payload:false});
+        errDispatch({ type: "blocked", payload: false });
         errRef.current.classList.remove('visible-validate-err');
-    },3000);    
+    }, 3000);
 }
 
 
+export const checkInputValidity = (regex, ref) => {
+    console.log(ref);
+    if (!regex.test(ref.current.value)) {
+        ref.current.classList.add("wrong-auth-input");
+        return false;
+    }
+    else {
+        ref.current.classList.remove("wrong-auth-input");
+        return true;
+    }
+}
 export function validateFormInputs(formInputs) {
     let isValid = true;
     const errors = {};
@@ -81,7 +93,7 @@ export function validateFormInputs(formInputs) {
     };
 }
 
-export const redirectOnAuth = (rejectRoute,authRoute,navigate) => {
+export const redirectOnAuth = (rejectRoute, authRoute, navigate) => {
     const auth = getAuth();
     if (auth.currentUser === null) {
         if (rejectRoute) {
@@ -92,3 +104,32 @@ export const redirectOnAuth = (rejectRoute,authRoute,navigate) => {
         navigate(authRoute);
     }
 }
+
+export const PasswordAuthUtilities = {
+    requestChangeOfPassword: (passwordResetEmail, passwordDispatch,errDispatch, ref) => {
+        if (checkInputValidity(/\S+@\S+\.\S+/, passwordResetEmail)) {
+            passwordDispatch({ type: "isLoading", payload: true });
+            AxiosFacade.requestUserPasswordReset(passwordResetEmail.current.value).then(() => {
+                alert("An Email With Reset Code Has Been Sent To You")
+                passwordDispatch({ type: "emailSent", payload: true });
+                passwordDispatch({ type: "isLoading", payload: false });
+            }).catch(() => {
+                getValidateErrors({ validateErr: { err: "Something Went Wrong" } }, errDispatch, ref)
+                passwordDispatch({ type: "isLoading", payload: false });
+            })
+        }
+    },
+    resetUserPassword: (resetCode, passwordResetEmail, passwordDispatch,errDispatch, newPassword,ref) => {
+        if (checkInputValidity(/^[A-Za-z0-9]{6}$/, resetCode) && checkInputValidity(/^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/, newPassword)) {
+            AxiosFacade.resetUserPassword(passwordResetEmail.current.value, resetCode.current.value.toUpperCase(), newPassword.current.value).then(() => {
+                alert("Password Changed");
+                passwordDispatch({ type: "passwordReset", payload: false });
+                passwordDispatch({ type: "emailSent", payload: false });
+                passwordDispatch({ type: "resetDone", payload: false });
+            }).catch(() => {
+                getValidateErrors({ validateErr: { err: "The Provided Code Is Invalid" } }, errDispatch, ref)
+            })
+        }
+    }
+}
+

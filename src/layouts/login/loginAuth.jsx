@@ -76,7 +76,7 @@ const LoginAuth = () => {
         <>
             <ValidateErr ref={errRef} err={errState.err} />
             <section className="auth login-auth">
-                <AuthForm scndAction={() => {}} scndBtnText="Password Forgot" hasScndText={false} blocked={errState.blocked} action={loginToAccount} heading="Login To An Account" gAction={googleAction} aAction={appleAction} authType="login" btnText="Login">
+                <AuthForm ref={errRef} errDispatch={errDispatch} scndAction={() => {}} scndBtnText="Password Forgot" hasScndText={false} blocked={errState.blocked} action={loginToAccount} heading="Login To An Account" gAction={googleAction} aAction={appleAction} authType="login" btnText="Login">
                     {formInpts.map((input, index) => (
                         <AuthInput label={input.label} ref={input.ref} type={input.type} key={index} />
                     ))}
