@@ -80,6 +80,7 @@ export const dashboardNavLinks = [
     {
         name: "Talk & Text",
         img: microphoneIcon,
+        id:0,
         menu: [{
             name:"Text To Speech",
             link: "/dashboard/services/text-to-speech",
@@ -96,6 +97,7 @@ export const dashboardNavLinks = [
     {
         name: "Videos",
         img: videoIcon,
+        id: 1,
         menu: [
             {
                 name:"Subtitles To Video",

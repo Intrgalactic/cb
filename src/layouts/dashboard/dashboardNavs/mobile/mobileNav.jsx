@@ -1,6 +1,7 @@
 import logo from 'src/assets/images/loader.png';
 import MobileLap from './mobileLap';
 import logoutImg from 'src/assets/images/logout.png';
+import { useEffect } from 'react';
 
 const MobileNav = () => {
     const logout = () => {
@@ -15,4 +16,4 @@ const MobileNav = () => {
     )
 }
 
-export default MobileNav;
+export default MobileNav;   
