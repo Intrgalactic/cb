@@ -128,7 +128,8 @@ body {
 
 @media screen and (min-width:1024px) {
     .auth {
-        padding-top: calc(10vh + 70px);
+        padding-top:clamp(80px,calc(10vh + 70px),210px)
+        
     }
     .validate-err p:last-of-type {
         font-size: 1em;

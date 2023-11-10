@@ -8,6 +8,7 @@ import videoIcon from 'src/assets/images/icons/video.png';
 import settingsIcon from 'src/assets/images/icons/settings.png';
 import camera from 'src/assets/images/camera.png';
 import subtitles from 'src/assets/images/subtitles.png';
+import clone from 'src/assets/images/clone.png';
 
 export const pricingItems = [{
     heading: "Starter",
@@ -92,6 +93,12 @@ export const dashboardNavLinks = [
             link: "/dashboard/services/speech-to-text",
             alt: "speech to text",
             img: quotes
+        },
+        {
+            name: "Voice Cloning",
+            link: "/dashboard/services/voice-cloning",
+            alt: "voice cloning",
+            img: clone,
         }]
     },
     {
@@ -110,6 +117,12 @@ export const dashboardNavLinks = [
                 link: "/dashboard/services/subtitles-from-video",
                 alt: "subtitles from video",
                 img: camera
+            },
+            {
+                name: "Video Enhancer",
+                link: "/dashboard/services/video-enhancer",
+                alt: "video enhance",
+                img: video
             }
         ],
     },

@@ -9,3 +9,5 @@ const DashboardBox = ({heading,children}) => {
         </div>
     )
 }
+
+export default DashboardBox;
