@@ -11,6 +11,7 @@ const SubscriptionDetails = () => {
     useEffect(() => {
         //Retrieve User Subscription Details
     },[]);
+    //Example User Data
     const details = [{
         img: card,
         content: "Saved Card - 44XX 92XX"
