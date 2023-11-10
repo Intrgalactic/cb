@@ -13,7 +13,7 @@ const UserDetails = ({ heading, items, categoryImg,detailsIndex}) => {
             }
             </h4>
             <div className="dashboard-box__user-details__container">
-                <img src={categoryImg} alt={heading} />
+                <img src={categoryImg} alt={heading} className="user-details-category-img"/>
                 <div className="dashboard-box__user-details__container__details">
                     {items.map((item,index) => (
                         <UserDetail content={item.content} key={index} img={item.img}/>

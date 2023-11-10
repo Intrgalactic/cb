@@ -17,12 +17,11 @@ const MobileLap = () => {
             const id = e.target.id.slice(e.target.id.lastIndexOf("-") + 1) !== "" ? e.target.id.slice(e.target.id.lastIndexOf("-") + 1) : e.target.parentNode.id.slice(e.target.id.lastIndexOf("-") + 1)
             setLinkListChanged(id);
         }
-        console.log('seia');
     }
     return (
         <div className="mobile-nav__mobile-lap" ref={lapRef}>
             {dashboardNavLinks.map((link, index) => (
-                <MobileNavLink linkListChanged={linkListChanged} id={link.id} src={link.img} menu={link.menu ? link.menu : false} alt={link.name} key={index} />
+                <MobileNavLink linkListChanged={linkListChanged} link={link.link} id={link.id} src={link.img} menu={link.menu ? link.menu : false} alt={link.name} key={index} />
             ))}
         </div>
     )
