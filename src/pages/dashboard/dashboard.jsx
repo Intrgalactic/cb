@@ -7,7 +7,7 @@ import MobileNav from "src/layouts/dashboard/dashboardNavs/mobile/mobileNav";
 import DashboardPanel from "src/layouts/dashboard/dashboardPanel";
 import "src/styles/dashboard.css";
 
-import mobileDashboard from 'src/assets/images/mobile-dashboard.png';
+import mobileDashboard from 'src/assets/images/mobile-dashboard.jpg';
 import mediumDashboard from 'src/assets/images/medium-dashboard.jpg';
 import dashboard from 'src/assets/images/dashboard.jpg'
 import { getBackgroundOnSizeChange, loadBackgrounds } from "src/utilities/assetsLoaders";
