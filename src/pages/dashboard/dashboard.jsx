@@ -35,6 +35,7 @@ const Dashboard = () => {
         }
         prevWindowSize.current = windowSize.width;
     }, [setBackgroundsLoaded, windowSize.width])
+    
     return (
         <>
             {backgroundsLoaded ?

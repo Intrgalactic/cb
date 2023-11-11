@@ -9,7 +9,6 @@ export const errInitialState = {
 
 export const errReducer = (state, action) => {
     for (const key of Object.keys(errInitialState)) {
-        console.log(key);
         if (key === action.type) {
             return { ...state, [key]: action.payload };
         }
