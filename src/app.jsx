@@ -12,6 +12,7 @@ import FontFaceObserver from "fontfaceobserver"
 import LoadingModal from "./layouts/loadingModal"
 import { UserSubscriptionContext } from "./context/userSubscriptionContext"
 import Dashboard from "./pages/dashboard/dashboard"
+import TextToSpeech from "./pages/dashboard/services/textToSpeech/textToSpeech"
 
 const router = createBrowserRouter([
     {
@@ -33,11 +34,10 @@ const router = createBrowserRouter([
     {
         path: "/dashboard",
         element: <Dashboard/>,
-        children:[
-            {
-                
-            }
-        ]
+    },
+    {
+        path: "/dashboard/services/text-to-speech",
+        element: <TextToSpeech/>
     }
 ])
 

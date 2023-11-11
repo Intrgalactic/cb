@@ -12,6 +12,7 @@ import mediumDashboard from 'src/assets/images/medium-dashboard.jpg';
 import dashboard from 'src/assets/images/dashboard.jpg'
 import { getBackgroundOnSizeChange, loadBackgrounds } from "src/utilities/assetsLoaders";
 import LoadingModal from "src/layouts/loadingModal";
+import NavDetector from "./navDetector";
 
 const backgrounds = [[mobileDashboard], [mediumDashboard], [dashboard]];
 
@@ -40,9 +41,7 @@ const Dashboard = () => {
         <>
             {backgroundsLoaded ?
                 <div className="dashboard">
-                    {windowSize.width < 1024 ?
-                        <MobileNav /> : <DesktopNav />
-                    }
+                    <NavDetector windowSize={windowSize}/>
                     <DashboardPanel />
                 </div> : <LoadingModal isLoading={true} />
             }
