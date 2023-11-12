@@ -28,16 +28,24 @@ const   TTSServiceInputSection = () => {
         setTextInput(e.target.value);
     }
     const setFile = (file) => {
-        TTSDispatch({type:"file",payload: file})
+        TTSDispatch({type:"file",payload: file[0]})
     }
     const getQueryResponse = () => {
     }
+    const fileTypes = [
+        "application/msword",                            // DOC
+        "text/plain",                                     // TXT
+        "application/pdf",                                // PDF
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+    ]
     return (
         <div className="tts-service-input-section service-main-input-section">
             <ServiceInputSection>
                 <TextInput onChange={handleChange} />
                 <FileInputSection
+                    fileTypes={fileTypes}
                     type={TTSState.type}
+                    files={TTSState.file}
                     serviceName={TTSState.serviceName}
                     fileToDownload={TTSState.fileToDownload}
                     setFile={setFile}

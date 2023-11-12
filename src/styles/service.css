@@ -81,6 +81,7 @@
     cursor: pointer;
 }
 .file-download__container,
+.file-list__container,
 .file-attach__container {
     background-color: rgba(0, 0, 0, 0.1);
     border: 2px solid #2C233E;
@@ -89,7 +90,39 @@
     font-family: NexaHeavy;
     text-align: center;
 }
+.file-list {
+    max-height: 199px;
+}
+.file-list__container {
+    height: 139px;
+    max-height: 139px;
+    position: relative;
+    overflow-y: scroll;
+}
+.voice-sample-msg {
+    position: absolute;
+    top:50%;
+    left: 50%;
+    width: 100%;
+    transform: translate(-50%,-50%);
+    margin:0;
+}
+.file-record {
+    display: flex;
+    padding-inline:20px;
+    cursor: pointer;
+    align-items: center;
+    transition-duration: 200ms;
+    justify-content: space-between;
+}
+.file-record:hover {
+    background-color: rgba(0,0,0,0.1);
+}
+.file-record img {
+    height: 20px;
+    width: auto;
 
+}
 .file-download__container {
     padding-block: 20px;
 }
@@ -201,12 +234,52 @@
 .option-select-heading {
     justify-content: space-between;
 }
+.service-checkbox__container {
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    justify-content: space-between;
+}
+.service-checkbox {
+    border:2px solid #2C233E;
+    width: 30px;
+    min-width: 30px;
+    height: 30px;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+}
+.service-checkbox img { 
+    height: auto;
+    vertical-align: middle;
+    width: 20px;
+}
+.service-checkbox__container p {
+    font-family: NexaRegular;
+    font-size: 10px;
+    width: 80%;
+    text-align: right;
+}
+
+.file-record p {
+    font-size: 0.8em;
+}
 @media screen and (min-width: 650px) {
     .options-row {
         overflow-x: auto;
     }
     .option-select__options__record p,.option-select-heading p  {
         font-size: 0.8em;
+    }
+    .service-checkbox__container p {
+        font-size: 14px;
+    }
+    .file-record img {
+        height:30px;
+    }
+    .file-record p {
+        font-size: 1em;
     }
 }
 @media screen and (min-width:1024px) {
@@ -259,5 +332,8 @@
     }
     .option-select__options__record p,.option-select-heading p  {
         font-size: 1em;
+    }
+    .service-checkbox__container {
+        width: 35vw;
     }
 }

@@ -2,7 +2,7 @@ import { useReducer } from "react";
 import ServiceInputSection from "src/layouts/dashboard/services/serviceInputSection";
 import FileInputSection from "../files/fileInputSection";
 import AudioRecorder from "./recordings/audioRecorder";
-import OptionsSelectSection from "../optionsSelectSection";
+import OptionsSelectSection from "../multipleServices/optionsSelectSection";
 import ProcessBtn from "../processBtn";
 
 const STTServiceInputSection = () => {
@@ -26,11 +26,11 @@ const STTServiceInputSection = () => {
     const [STTState, STTDispatch] = useReducer(STTReducer, STTInitialState);
 
     const setFile = (file) => {
-        STTDispatch({type:"file",payload: file})
+        STTDispatch({type:"file",payload: file[0]})
     }
     const setRecordingFile = (file) => {
         const recordings = STTState.recordingFiles !== undefined ? STTState.recordingFiles : [];
-        recordings.push(file);
+        recordings.push(file[0]);
         STTDispatch({type:"recordingFiles",payload: recordings});
     }
     const getQueryResponse = () => {
@@ -56,13 +56,33 @@ const STTServiceInputSection = () => {
         heading: "Output",
         options: ["Txt","Pdf","Docx"]
     }]]
-
+    const fileTypes = [
+        "audio/mpeg",    // MP3
+        "audio/wav",     // WAV
+        "audio/wave",    // WAV alternate
+        "audio/aac",     // AAC
+        "audio/ogg",     // OGG
+        "audio/midi",    // MIDI
+        "audio/x-midi",  // MIDI alternate
+        "audio/flac",    // FLAC
+        "audio/x-ms-wma",// WMA
+        "audio/alac",    // ALAC
+        "audio/amr",     // AMR
+        "audio/webm",    // WebM Audio
+        "audio/aiff",    // AIFF
+        "audio/x-aiff",  // AIFF alternate
+        "audio/vnd.rn-realaudio", // Real Audio
+        "audio/opus",    // Opus
+        "audio/L16"      // PCM
+    ]
     return (
         <div className="stt-service-input-section service-main-input-section">
             <ServiceInputSection>
                 <AudioRecorder setRecordingFile={setRecordingFile} selectedRecordingFile={STTState.selectedRecordingFile} setSelectedRecordingFile={STTDispatch} recordingFiles={STTState.recordingFiles}/>
                 <FileInputSection
+                    fileTypes={fileTypes}
                     type={STTState.type}
+                    files={STTState.file !== undefined ? STTState.file : STTState.recordingFiles !== undefined ? STTState.recordingFiles : undefined}
                     serviceName={STTState.serviceName}
                     fileToDownload={STTState.fileToDownload}
                     setFile={setFile}
