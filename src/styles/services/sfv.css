@@ -17,11 +17,13 @@
     background-color: #0A001F;
     display: flex;
     border-radius:5px;
+    overflow-y: scroll;
     box-shadow: 0px 4px 20px rgba(0,0,0,0.25);
     align-items: center;
     flex-direction: column;
     justify-content: space-between;
     top:130px;
+    max-height: 600px;
     width: 90vw;    
     max-width: calc(100vw - 10%);
     left:5%;
@@ -152,5 +154,8 @@
     .service-choose__container .service-choose:last-of-type .service-choose__content {
         border-bottom-right-radius: 5px;
     }
-
+    .service-choose__container {
+        max-height: 2000px;
+        overflow-y: auto;
+    }
 }
