@@ -1,0 +1,156 @@
+
+.file-video {
+    width: 100%;
+    height: 260px; 
+}
+.file-video video {
+   width: 100%;
+   border-radius: 10px;
+   border:2px solid #2C233E;   
+   height: 100%;
+}
+.sfv-service-input-section {
+    position: relative;
+}
+.service-choose__container {
+    position:fixed;
+    background-color: #0A001F;
+    display: flex;
+    border-radius:5px;
+    box-shadow: 0px 4px 20px rgba(0,0,0,0.25);
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+    top:130px;
+    width: 90vw;    
+    max-width: calc(100vw - 10%);
+    left:5%;
+}
+.service-choose__container .service-choose:first-of-type .service-choose__content {
+    background-image: url('src/assets/images/web-service-choose.jpg');
+}
+.service-choose__container .service-choose:last-of-type .service-choose__content {
+    background-image: url('src/assets/images/desktop-service-choose.jpg');
+    text-align: right;
+}
+.service-choose__container .service-choose:last-of-type .service-choose__content p {
+    align-self: flex-end;
+}
+.service-choose__container .service-choose:last-of-type .service-choose-heading__container {
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    justify-content: flex-end;
+}
+.service-choose__container .service-choose:first-of-type .service-choose-heading__container {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.service-choose-heading {
+    background-image: linear-gradient(#BD00FF,#5500FF);
+    font-family: NexaHeavy;
+    background-clip: text;
+    margin:0;
+    color:transparent;
+    font-size: 1.5em;
+    -webkit-background-clip: text;
+}
+.service-choose {
+    width: calc(100%);
+    background-size: 100% 100%;
+    display: flex;
+    flex-direction: column;
+}
+.service-choose__container .service-choose:last-of-type button {
+    align-self: flex-end;
+}
+.service-choose__content button {
+    width: 200px;
+    height: 40px;
+    background-color: #BD00FF;
+    font-family: NexaHeavy;
+    cursor: pointer;
+    border-radius: 10px;
+    border:none;
+    color:white;
+    box-shadow:0px 4px 4px rgba(0,0,0,0.25);
+}
+.service-choose-heading__container {
+    margin:0;
+    height: calc(400px * 0.1);
+    padding-inline:30px;
+    display: flex;
+    align-items: center;
+    background-color: #080019;
+}
+.service-choose__content h3 {
+    font-family: NexaHeavy;
+    font-size: 1em;
+}
+.service-choose__content h3,.service-choose__content p {
+    margin:0;
+    color:white;
+}
+.service-choose__content p {
+    font-family: NexaRegular;
+    font-size: 0.7em;
+}
+.service-choose__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap:20px;
+    padding-block:20px;
+    background-size:cover;
+    background-position:center;
+    padding-inline:30px;
+}
+
+.service-choose__container .service-choose:last-of-type {
+    flex-direction: column-reverse;
+}
+
+.subtitles-from-video__panel {
+    filter:blur(20px);
+}
+
+@media screen and (min-width:1024px) {
+    .service-choose__container {
+        flex-direction: row;
+        width: calc(90% - clamp(200px,20vw,500px) - 100px);
+        left:calc(clamp(200px,20vw,500px) + 70px + 5%);
+        height: 500px;
+    }
+    .service-choose {
+        height: 500px;
+    }
+    .service-choose__content {
+        height: 90%;
+    }
+    .service-choose-heading__container {
+        height: 10%;
+    }
+    .service-choose__container .service-choose:last-of-type {
+        flex-direction: column;
+    }
+    .service-choose__container .service-choose:last-of-type .service-choose-heading__container {
+        border-bottom-left-radius: 0px;
+        border-bottom-right-radius: 0px;
+        border-top-right-radius: 5px;
+    }
+    .service-choose__container .service-choose:first-of-type .service-choose-heading__container {
+        border-top-right-radius: 0px;
+    }
+    .service-choose__content h3 {
+        font-size: 1.3em;
+    }
+    .service-choose__content p {
+        font-size: 0.8em;
+    }
+    .service-choose:first-of-type .service-choose__content {
+        border-bottom-left-radius: 5px;
+    }
+    .service-choose__container .service-choose:last-of-type .service-choose__content {
+        border-bottom-right-radius: 5px;
+    }
+
+}

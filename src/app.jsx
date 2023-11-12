@@ -15,6 +15,7 @@ import Dashboard from "./pages/dashboard/dashboard"
 import TextToSpeech from "./pages/dashboard/services/textToSpeech/textToSpeech"
 import SpeechToText from "./pages/dashboard/services/speechToText/speechToText"
 import VoiceCloning from "./pages/dashboard/services/voiceCloning/voiceCloning"
+import SubtitlesFromVideo from "./pages/dashboard/services/subtitlesFromVideo/subtitlesFromVIdeo"
 
 const router = createBrowserRouter([
     {
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
     {
         path: "/dashboard/services/voice-cloning",
         element: <VoiceCloning/>
+    },
+    {
+        path: "/dashboard/services/subtitles-from-video",
+        element: <SubtitlesFromVideo/>
     }
 ])
 

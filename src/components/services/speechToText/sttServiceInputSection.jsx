@@ -11,7 +11,6 @@ const STTServiceInputSection = () => {
         selectedRecordingFile: undefined,
         file: undefined,
         type: "Audio",
-        serviceName: "speech-to-text",
         fileToDownload: undefined,
     }
 
@@ -83,7 +82,6 @@ const STTServiceInputSection = () => {
                     fileTypes={fileTypes}
                     type={STTState.type}
                     files={STTState.file !== undefined ? STTState.file : STTState.recordingFiles !== undefined ? STTState.recordingFiles : undefined}
-                    serviceName={STTState.serviceName}
                     fileToDownload={STTState.fileToDownload}
                     setFile={setFile}
                 />

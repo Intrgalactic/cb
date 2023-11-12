@@ -64,7 +64,7 @@ const VCServiceInputSection = () => {
     return (
         <div className="vc-service-input-section service-main-input-section">
             <ServiceInputSection>
-                <FilesInput fileTypes={fileTypes} multiple={true}  serviceName={VCState.serviceName} setFile={setFile} />
+                <FilesInput fileTypes={fileTypes} multiple={true}  setFile={setFile} heading="Add Your Voice Samples" />
                 <VCFileInputSection multiple={true} deleteFile={deleteFile} fileTypes={fileTypes} serviceName="voice-cloning" fileType="audio/*" type="Audio" setFile={setFile} files={VCState.files.length === 0 ? undefined : VCState.files}/>
             </ServiceInputSection>
             <ServiceCheckbox isChecked={VCState.isChecked} setIsChecked={() => {VCDispatch({type:"isChecked",payload: !VCState.isChecked})}} checkText={`I hereby confirm that i am the owner of the voice or have obtained all necessary permissions and rights to use the voice`}/>
