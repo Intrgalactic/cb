@@ -13,6 +13,7 @@ import LoadingModal from "./layouts/loadingModal"
 import { UserSubscriptionContext } from "./context/userSubscriptionContext"
 import Dashboard from "./pages/dashboard/dashboard"
 import TextToSpeech from "./pages/dashboard/services/textToSpeech/textToSpeech"
+import SpeechToText from "./pages/dashboard/services/speechToText/speechToText"
 
 const router = createBrowserRouter([
     {
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
     {
         path: "/dashboard/services/text-to-speech",
         element: <TextToSpeech/>
+    },
+    {
+        path: "/dashboard/services/speech-to-text",
+        element: <SpeechToText/>
     }
 ])
 

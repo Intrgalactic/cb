@@ -1,0 +1,63 @@
+.audio-recorder__container .serivce-main-input__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    min-height: 260px;
+    height: fit-content;
+}
+
+.record-btn {
+    width: 150px;
+    height: 40px;
+    border-radius: 10px;
+    background-color: var(--blue);
+    color: white;
+    font-family: NexaHeavy;
+    border: 0;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.sound-waves {
+    width: 200px;
+
+}
+
+.recording {
+    width: 60px;
+    border:2px solid #2C233E;
+    border-radius: 5px;
+    background-color: rgba(0,0,0,0.1);
+    padding:10px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+}
+.recording:hover {
+    cursor: pointer;
+}
+.recording p {
+    color:white;
+    font-size: 12px;
+    font-family: NexaHeavy;
+}
+.recordings__container {
+    display: flex;
+    justify-content:center;
+    flex-wrap: wrap;
+    margin-top: 30px;
+    gap: 10px;
+}
+
+.recording img {
+    height: 20px;
+    width: auto;
+}
+
+.selected-recording {
+    position: absolute;
+    left:50%;
+    top:50%;
+    width: 60px;
+    transform: translate(-50%,-50%);
+}

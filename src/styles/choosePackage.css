@@ -168,6 +168,7 @@
     .audio-service-preview__left-aside,.text-output-container {
         width: 40vw;
         height: 380px;
+        max-width: 800px;
     }
     .video-service-preview-section {
         background-image: url("src/assets/images/choose-package-first-try.jpg");

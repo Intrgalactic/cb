@@ -120,6 +120,95 @@
     color:white;
     height: 50px;
 }
+.option-select__options {
+ max-height: 0px;
+ overflow-y: hidden;
+ transition-timing-function:ease;
+ transition-duration: 300ms;
+}
+.visible-options-list {
+    max-height: 200px;
+    transition-timing-function:ease;
+}
+.options-select-section {
+    margin-top:30px;
+    border:2px solid #2C233E;
+    border-radius: 10px;
+    box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+    padding:20px;
+}
+.options-select-section__rows {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap:30px;
+    flex-wrap: wrap;
+}
+.options-row {
+    width: 100%;
+    display: flex;
+    overflow-x: scroll;
+    gap: 50px;
+    justify-content: space-between;
+    padding-bottom: 20px;
+}
+.option-select {
+    background-color: rgba(0,0,0,0.1);
+    border-radius: 5px;
+    border:2px solid #2C233E;
+    box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+    min-width: 160px;
+    height: fit-content;
+}
+
+.option-select__options__record,.option-select-heading {
+    display: flex;
+    height: 50px;
+    padding-inline:20px;
+    align-items: center;
+}
+.option-select-heading {
+    font-family: NexaHeavy;
+}
+.option-select__options__record {
+    font-family: NexaRegular;
+    transition-duration: 100ms;
+}
+.option-select__options__record p,.option-select-heading p {
+    margin:0;
+    font-size: 0.7em;
+}
+.option-select {
+    cursor: pointer;
+}
+.option-select__options__record:first-of-type {
+    border-top:2px solid #2C233E;
+}
+.option-select__options__record:not(.option-select__options__record:last-of-type) {
+    border-bottom: 2px solid #2C233E;
+}
+.option-select__options__record:hover {
+    background-color: rgba(0,0,0,0.2);
+}
+.option-select-list-img {
+    width:auto;
+    height: 0.7em;
+    transition-duration: 300ms;
+}
+.rotated-scroll-down {
+    transform: rotate(180deg);
+}
+.option-select-heading {
+    justify-content: space-between;
+}
+@media screen and (min-width: 650px) {
+    .options-row {
+        overflow-x: auto;
+    }
+    .option-select__options__record p,.option-select-heading p  {
+        font-size: 0.8em;
+    }
+}
 @media screen and (min-width:1024px) {
     .service-heading {
         padding-inline: 30px;
@@ -146,6 +235,7 @@
     }
     .serivce-main-input {
         width: 35vw;
+        max-width: 800px;
     }
     .file-input-section {
         display: flex;
@@ -163,5 +253,11 @@
 
         flex-direction: row;
         justify-content: space-between;
+    }
+    .option-select {
+        width: 200px;
+    }
+    .option-select__options__record p,.option-select-heading p  {
+        font-size: 1em;
     }
 }

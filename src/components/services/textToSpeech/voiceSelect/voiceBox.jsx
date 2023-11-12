@@ -1,6 +1,9 @@
 import { memo } from "react";
 
-const VoiceBox = memo(function VoiceBox({name,category,description}) {
+const VoiceBox = memo(function VoiceBox({name,category,description,setSelectedVoice}) {
+    const selectVoice = () => {
+        
+    }
     return (
         <div className="voice-box">
             <h5>{name}</h5>

@@ -3,9 +3,10 @@ import ServiceInputSection from "src/layouts/dashboard/services/serviceInputSect
 import TextInput from "./textInput";
 import FileInputSection from "../files/fileInputSection";
 import ProcessBtn from "../processBtn";
-import VoiceSelectSection from "./voiceSelectSection";
+import VoiceSelectSection from "./voiceSelect/voiceSelectSection";
+import VoiceSlidersSection from "./voiceSliders/voiceSlidersSection";
 
-const TTSServiceInputSection = () => {
+const   TTSServiceInputSection = () => {
     const TTSInitialState = {
         file: undefined,
         type: "Text",
@@ -30,7 +31,6 @@ const TTSServiceInputSection = () => {
         TTSDispatch({type:"file",payload: file})
     }
     const getQueryResponse = () => {
-
     }
     return (
         <div className="tts-service-input-section service-main-input-section">
@@ -43,7 +43,8 @@ const TTSServiceInputSection = () => {
                     setFile={setFile}
                 />
             </ServiceInputSection>
-            <ProcessBtn enabled={textInput !== "" || TTSState.file !== undefined} btnText="Synthesize" process={() => { }} />
+            <VoiceSlidersSection/>
+            <ProcessBtn enabled={textInput !== "" || TTSState.file !== undefined} btnText="Synthesize" process={getQueryResponse} />
             <VoiceSelectSection/>
         </div>
     )

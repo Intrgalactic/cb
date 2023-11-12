@@ -43,6 +43,35 @@
 .voice-box p {
     font-size: 0.8em;
 }
+
+.voice-slider__container-slider {
+    width: 100%;
+    border:2px solid #2C233E;
+    border-radius: 20px;
+    height: 30px;
+    width: 100%;
+    margin:0;
+    background-color: rgba(0,0,0,0.1);
+    appearance: none;
+    box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+    -webkit-appearance: none;
+}
+.voice-slider__container-slider::-webkit-slider-thumb {
+    appearance: none;
+    -webkit-appearance: none;
+    height: 40px;
+    width: 10px;
+    border-radius: 5px;
+    background-color: var(--blue);
+}
+.voice-slider__container-slider:focus::-webkit-slider-thumb {
+    cursor: pointer;
+}
+.voice-slider__container-scale {
+    display: flex;
+    justify-content: space-between;
+    font-family: NexaHeavy;
+}
 @media screen and (min-width:650px) {
     .voice-box {
         width: 35vw;
@@ -56,5 +85,6 @@
 @media screen and (min-width:1024px) {
     .voice-box {
         width: calc(30% - 40px);
+        max-width: 400px;
     }
 }
