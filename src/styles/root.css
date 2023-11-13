@@ -23,7 +23,7 @@
   @font-face {
     font-family: NexaRegular;
     font-display: swap;
-    src: url('src/assets/fonts/NexaRegular.otf');
+    src: url('src/assets/fonts/NexaRegular.ttf');
   }
   body {
     padding:0;

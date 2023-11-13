@@ -13,6 +13,8 @@ import mediumHero from 'src/assets/images/medium-hero.jpg';
 import fullHero from 'src/assets/images/hero.jpg';
 import ServicesSection from 'src/layouts/homeServices/servicesSection';
 import Pricing from 'src/layouts/home/homePricing/pricing';
+import Testimonials from 'src/layouts/home/homeTestimonials/testimonials';
+import Faq from 'src/layouts/home/faq/faq';
 
 const backgrounds = [
   [mobileHero],
@@ -42,11 +44,11 @@ const Home = () => {
     <>
       {backgroundsLoaded ?
         <>
-
           <Header />
           <Hero />
           <ServicesSection />
           <Pricing />
+          <Testimonials />
           <Footer />
         </> :
         <LoadingModal isLoading={true} />
