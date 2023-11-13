@@ -351,18 +351,6 @@ header {
         width: 200px;
         height: 60px;
     }
-    .services {
-        flex-direction: row;
-        flex-wrap: wrap;
-        column-gap: 5vw;
-        background-image: url('src/assets/images/medium-services.jpg');
-    }
-    .services__service-box {
-        width: 40vw;
-    }
-    .service-box__p {
-        font-size: 0.75em;
-    }
     .section-h2 {
         font-size: 2.2em;
         text-align: center;
@@ -446,14 +434,6 @@ header {
     .pricing__pricing-items__container {
         column-gap: 5vw;
         width: 90vw;
-    }
-    .service-section__heading h2 {
-        font-size: 2.2em;
-    }
-    .service-section__heading p {
-        font-size: 1.5em;
-        width: 80%;
-        margin:auto;
     }
     .services__container,.use-case-service__branch__container {
         display: flex;
