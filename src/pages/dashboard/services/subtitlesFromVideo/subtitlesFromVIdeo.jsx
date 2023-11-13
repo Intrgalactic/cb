@@ -15,7 +15,7 @@ const SubtitlesFromVideo = () => {
         <div className="subtitles-to-video service-page">
             <NavDetector windowSize={windowSize}/>
             <SubtitlesFromVideoPanel blur={blur}/>
-            {blur === "20px" && <ServiceChooseContainer webAction={webAction}/>}
+            <ServiceChooseContainer display={blur === "20px" ? "flex" : "none"} webAction={webAction}/>
         </div>
     )
 }

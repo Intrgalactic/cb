@@ -1,8 +1,8 @@
 import ServiceChoose from "./serviceChoose"
 
-const ServiceChooseContainer = ({desktopAction,webAction}) => {
+const ServiceChooseContainer = ({display,desktopAction,webAction}) => {
     return (
-        <div className="service-choose__container">
+        <div className="service-choose__container" style={{display:display}}>
             <ServiceChoose
                 heading="Classic"
                 contentHeading="An AI Subtitle Extraction Tool"

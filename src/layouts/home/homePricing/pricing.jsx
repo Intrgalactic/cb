@@ -1,7 +1,6 @@
 import SectionH2 from "src/components/sectionH2";
 import PricingBox from "./pricingBox";
 import { pricingItems } from "src/utilities/utils";
-import SectionContainer from "src/components/sectionContainer";
 
 const Pricing = () => {
     return (

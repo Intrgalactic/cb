@@ -331,6 +331,7 @@
         align-items: center;
         flex-direction: column;
         row-gap:20px;
+        z-index:999;
         background-color: #0A001F;
         min-height: 100vh;
         width: clamp(200px,20vw,500px);
