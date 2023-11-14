@@ -11,7 +11,7 @@ const VideoServicePreviewSection = () => {
         src: "",
         width: "54px",
         height: "39px"
-    },{
+    }, {
         img: microphone,
         alt: "microphone",
         heading: "Cutting-Edge And Studio Quality",
@@ -22,9 +22,11 @@ const VideoServicePreviewSection = () => {
     }]
     return (
         <section className="video-service-preview-section">
-            {items.map((item,index) => (
-                <VideoServicePreview width={item.width} height={item.height} src={item.src} alt={item.alt} heading={item.heading} subHeading={item.subHeading} img={item.img} key={index}/>
-            ))}
+            <div className='preview-section__container'>
+                {items.map((item, index) => (
+                    <VideoServicePreview width={item.width} height={item.height} src={item.src} alt={item.alt} heading={item.heading} subHeading={item.subHeading} img={item.img} key={index} />
+                ))}
+            </div>
         </section>
     )
 }

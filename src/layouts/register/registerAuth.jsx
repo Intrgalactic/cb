@@ -87,12 +87,14 @@ const RegisterAuth = () => {
         <>
             <ValidateErr ref={errRef} err={errState.err} />
             <section className="auth register-auth">
-                <AuthForm blocked={errState.blocked} hasScndBtn={false} action={registerAccount} heading="Create An Account" btnText="Join" gAction={googleAction} aAction={appleAction} authType="register">
-                    {formInputs.map((input, index) => (
-                        <AuthInput label={input.label} ref={input.ref} type={input.type} key={index} />
-                    ))}
-                </AuthForm>
-                <RegisterBenefits heading="Upgrade Your Content Speed Creation" subHeading="Get All Tools The Content Creator Needs With Only One Click" />
+                <div className="register-auth__container">
+                    <AuthForm blocked={errState.blocked} hasScndBtn={false} action={registerAccount} heading="Create An Account" btnText="Join" gAction={googleAction} aAction={appleAction} authType="register">
+                        {formInputs.map((input, index) => (
+                            <AuthInput label={input.label} ref={input.ref} type={input.type} key={index} />
+                        ))}
+                    </AuthForm>
+                    <RegisterBenefits heading="Upgrade Your Content Speed Creation" subHeading="Get All Tools The Content Creator Needs With Only One Click" />
+                </div>
             </section>
             <LoadingModal isProcessing={isProcessing} />
         </>

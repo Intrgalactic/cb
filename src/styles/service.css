@@ -97,8 +97,9 @@
     height: 139px;
     max-height: 139px;
     position: relative;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
+
 .voice-sample-msg {
     position: absolute;
     top:50%;
@@ -320,6 +321,8 @@
     }
     .service-main-input-section {
         padding-inline:30px;
+        max-width: 1920px;
+        margin:auto
     }
     .service-input-section {
         display: flex;
@@ -335,5 +338,7 @@
     }
     .service-checkbox__container {
         width: 35vw;
+        max-width: 100%;
     }
+    
 }

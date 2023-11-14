@@ -396,14 +396,16 @@ header {
     width: auto;
 }
 .newsletter {
-    display: flex;
-    flex-direction: column;
+    background-color: #0A001F;
+    border-top: 2px solid var(--header-blue);
     padding-inline:5%;
     padding-block: 40px;
+}
+.newsletter__container {
+    display: flex;
+    flex-direction: column;
     row-gap: 30px;
-    background-color: #0A001F;
     color:white;
-    border-top: 2px solid var(--header-blue);
 }
 .newsletter__form h5 {
     font-size: 2em;
@@ -442,6 +444,7 @@ header {
     border-radius: 10px;
     font-family: NexaHeavy;
     color:white;
+    font-size: 1.2em;
     box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
 }
 .newsletter img {
@@ -505,6 +508,9 @@ header {
     margin:0;
     margin-bottom:30px;
 }
+.bottom-services {
+    width: 90vw;
+}
 @media screen and (min-width:650px) {
     .hero {
         background-image: url('src/assets/images/medium-hero.jpg');
@@ -532,6 +538,7 @@ header {
         flex-wrap: wrap;
         justify-content:center;
         column-gap: 5vw;
+        min-width: 90vw;
     }
     .pricing__box {
         width: clamp(200px,30vw,250px);
@@ -610,7 +617,6 @@ header {
     }
     .pricing__pricing-items__container {
         column-gap: 5vw;
-        width: 90vw;
     }
     .services__container,.use-case-service__branch__container {
         display: flex;
@@ -669,6 +675,7 @@ header {
     }
     .testimonial-box {
         width: 25vw;
+        max-width: 400px;
     }
     .testimonial-description {
         max-height: 150px;
@@ -683,10 +690,11 @@ header {
         width: 300px;
 
     }
-    .newsletter {
+    .newsletter__container {
         height: 500px;
         justify-content: space-between;
         align-items: center;
+        flex-direction: row;
     }
     .newsletter__form {
         width: 500px;
@@ -713,6 +721,8 @@ header {
         flex-direction: row;
         width: 90vw;
         align-items: center;
+        max-width: 1920px;
+        margin:auto;
         justify-content: space-between;
     }
     .services__container .single-service:first-of-type {
@@ -747,5 +757,12 @@ header {
     }
     .bottom-services__branch .single-service__aside p {
         width: 90%;
+    }
+    .bottom-services .compare-service .single-service__aside,.bottom-services__branch,.use-case-services__branch,.testimonials__container,.newsletter__container  {
+        max-width: 1920px;
+        margin:auto;
+    }
+    .bottom-services__branch .single-service__aside {
+        max-width:700px;
     }
 }
