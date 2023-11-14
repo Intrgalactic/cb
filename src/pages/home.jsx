@@ -15,6 +15,7 @@ import ServicesSection from 'src/layouts/homeServices/servicesSection';
 import Pricing from 'src/layouts/home/homePricing/pricing';
 import Testimonials from 'src/layouts/home/homeTestimonials/testimonials';
 import Faq from 'src/layouts/home/faq/faq';
+import Newsletter from 'src/layouts/home/newsletter/newsletter';
 
 const backgrounds = [
   [mobileHero],
@@ -49,6 +50,8 @@ const Home = () => {
           <ServicesSection />
           <Pricing />
           <Testimonials />
+          <Faq/>
+          <Newsletter/>
           <Footer />
         </> :
         <LoadingModal isLoading={true} />
