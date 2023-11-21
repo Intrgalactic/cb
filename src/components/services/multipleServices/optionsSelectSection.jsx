@@ -1,6 +1,7 @@
+import { memo } from "react";
 import OptionsRow from "./optionsRow";
 
-const OptionsSelectSection = ({heading,categoriesRows}) => {
+const OptionsSelectSection = memo(function OptionsSelectSection({heading,categoriesRows}) {
     return (
         <div className="options-select-section">
             <p className="input-heading">{heading}</p>
@@ -10,7 +11,7 @@ const OptionsSelectSection = ({heading,categoriesRows}) => {
                 ))}
             </div>
         </div>
-    )
-}
+    ) 
+});
 
 export default OptionsSelectSection;

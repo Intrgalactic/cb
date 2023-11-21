@@ -1,0 +1,13 @@
+
+.file-image {
+    width: 100%;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    height: 260px;
+}
+
+.file-image img {
+    max-width: 100%;
+    max-height: 260px;
+}

@@ -10,6 +10,9 @@ const MobileLap = () => {
             lapRef.current.addEventListener("click", handleNavClick);
         }
         else lapRef.current.removeEventListener("click", handleNavClick);
+        return () => {
+            lapRef.current && lapRef.current.removeEventListener("click", handleNavClick);
+        }
     }, [lapRef.current])
     const handleNavClick = (e) => {
         if ((e.target.tagName === "IMG" && e.target.parentNode.id.startsWith("nav-link")) || e.target.id.startsWith("nav-link")) {

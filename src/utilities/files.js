@@ -36,3 +36,13 @@ export const handleMultipleFiles = (files,setFile,fileTypes,maxFileSize) => {
         setFile(filteredFiles);
     }
 }
+
+export const getFileFromBlobUrl = async (requestFile) => {
+    return await fetch(requestFile).then(response => response.blob()).then(blob => {
+        const urlParts = requestFile.split('/');
+            const fileName = urlParts[urlParts.length - 1];
+            const file = new File([blob], fileName, { type: blob.type });
+            console.log(file);
+            return file;
+    })
+}

@@ -8,13 +8,19 @@ const config = {
 }
 
 export const AxiosFacade = {
-    getUser: async (email,getJwtToken) => {
+    getUser: async (email, getJwtToken) => {
         var user;
-        user = await axios.post(`${import.meta.env.VITE_SERVER_FETCH_URL}get-user`,{
+        if (getJwtToken === true) {
+            var authConfig = {
+                ...config,
+                withCredentials: true
+            }
+        }
+        user = await axios.post(`${import.meta.env.VITE_SERVER_FETCH_URL}get-user`, {
             email: email.toLowerCase(),
-            getToken:getJwtToken,
-            web:true
-        },config).then(function (response) {
+            getToken: getJwtToken,
+            web: true
+        }, authConfig || config).then(function (response) {
             const data = response.data;
             console.log(data);
             user = data
@@ -26,18 +32,18 @@ export const AxiosFacade = {
     },
     changeUserName: async (userEmail, newUsername, setIsLoading) => {
         const body = {
-            username:newUsername,
-            email:userEmail
+            username: newUsername,
+            email: userEmail
         }
-        return await putFetchDB("update-user",body,204,setIsLoading);
+        return await putFetchDB("update-user", body, 204, setIsLoading);
     },
-    changeEmail: async (userEmail,newEmail,setIsLoading) => {
+    changeEmail: async (userEmail, newEmail, setIsLoading) => {
         const body = {
-            email:userEmail,
-            newEmail:newEmail.toLowerCase(),
+            email: userEmail,
+            newEmail: newEmail.toLowerCase(),
             emailChanged: true
         }
-        return await putFetchDB("update-user",body,204,setIsLoading);
+        return await putFetchDB("update-user", body, 204, setIsLoading);
     },
     createUser: async (name, userName, email) => {
         const body = {
@@ -46,16 +52,16 @@ export const AxiosFacade = {
             email: email.toLowerCase(),
             isPaying: false,
             emailChanged: false,
-            web:true
+            web: true
         }
-        return await postFetchDB('create-user',body,201,false);
+        return await postFetchDB('create-user', body, 201, false);
     },
     deleteUser: async (email, password) => {
         const body = {
             email: email.toLowerCase()
         }
         signInWithEmailAndPassword(email, password).then(async () => {
-            return await postFetchDB('delete-user',body,200);
+            return await postFetchDB('delete-user', body, 200);
         })
     },
     getUserCreatedVoices: async (userEmail) => {
@@ -64,10 +70,10 @@ export const AxiosFacade = {
         })
     },
     getVideoSubtitles: async (formData) => {
-        return  await postFetchDB('api/subs-to-video',formData,200,true);
+        return await postFetchDB('api/subs-to-video', formData, 200, true);
     },
-    getJwtToken: async() => {
-        return await axios.get(`${import.meta.env.VITE_SERVER_FETCH_URL}api/check-auth`,{withCredentials:true}).then(response => {
+    getJwtToken: async () => {
+        return await axios.get(`${import.meta.env.VITE_SERVER_FETCH_URL}api/check-auth`, { withCredentials: true }).then(response => {
             return response.data.authenticated;
         }).catch(() => {
             return false;
@@ -75,23 +81,42 @@ export const AxiosFacade = {
     },
     requestUserPasswordReset: async (email,) => {
         const body = {
-            email:email
+            email: email
         }
-        return await postFetchDB('api/request-user-password-reset',body,200,false);
+        return await postFetchDB('api/request-user-password-reset', body, 200, false);
     },
-    resetUserPassword: async (email,code,newPassword) => {
+    resetUserPassword: async (email, code, newPassword) => {
         const body = {
             email: email,
-            newPassword:newPassword,
+            newPassword: newPassword,
             code: code
         }
-        return await postFetchDB("api/reset-user-password",body,200,false);
+        return await postFetchDB("api/reset-user-password", body, 200, false);
+    },
+    getService: async (formData,config,endpoint) => {
+        console.log(formData,config,endpoint)
+        return await postFetchDB(endpoint,formData,200,true,config);
+    },
+    getServiceFile: async (fileName, ext) => {
+        const config = {
+            responseType: "blob"
+        }
+        return await axios.get(`${import.meta.env.VITE_SERVER_FETCH_URL}api/get/${fileName}.${ext}`, config).then(response => {
+            console.log(response.data);
+            console.log(URL.createObjectURL(response.data))
+        })
     }
 
 }
 
-async function postFetchDB(endpoint,body,successCode,hasBody) {
-    const response = await axios.post(`${import.meta.env.VITE_SERVER_FETCH_URL}${endpoint}`, body, config);
+async function postFetchDB(endpoint, body, successCode, hasBody,reqConfig) {
+    if (endpoint === "create-user") {
+        var authConfig = {
+            ...config,
+            withCredentials: true,
+        }
+    }
+    const response = await axios.post(`${import.meta.env.VITE_SERVER_FETCH_URL}${endpoint}`, body, reqConfig || authConfig || config);
     if (response.status === successCode) {
         if (hasBody) {
             return response.data;
@@ -103,7 +128,7 @@ async function postFetchDB(endpoint,body,successCode,hasBody) {
     }
 }
 
-async function putFetchDB(endpoint,body,successCode,setIsLoading) {
+async function putFetchDB(endpoint, body, successCode, setIsLoading) {
     const response = await axios.put(`${import.meta.env.VITE_SERVER_FETCH_URL}${endpoint}`, body, config);
     if (response.status === successCode) {
         setIsLoading(false);

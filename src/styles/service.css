@@ -31,6 +31,7 @@
     padding-inline: 5%;
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 
 .input-heading {
@@ -266,6 +267,70 @@
 .file-record p {
     font-size: 0.8em;
 }
+.wrong-input {
+    border:2px solid #5F0101;
+}
+.process-modal {
+    position: fixed;
+    top:50%;
+    background-color: rgba(10, 0, 31,0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px);
+    width: 100vw;
+    min-height: 100vh;
+    right:50%;
+    color:white;
+    transform: translate(50%,-50%);
+}
+
+.process-modal__container {
+    background-color:#0A001F;
+    backdrop-filter: blur(10px);
+    border:2px solid #2C233E;
+    border-radius: 10px;
+    font-family: NexaHeavy;
+    font-size: 1.2em;
+    width: 300px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 4px 20px rgba(0,0,0,0.5);
+    align-items: center;
+    justify-content: center;
+    padding:20px;
+}
+
+.cancel-process-btn {
+    width: 150px;
+    height: 50px;
+    background-color: red;
+    color:white;
+    border:0px;
+    border-radius: 5px;
+    font-family: NexaHeavy;
+    box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+}
+.process-image {
+    animation-name: processImage;
+    animation-duration: 2s;
+    height: 50px;
+    width: auto;
+    animation-timing-function: ease;
+    animation-iteration-count: infinite;
+}
+@keyframes processImage {
+    0% {
+        transform: rotate(0deg);
+    }
+    50% {
+        transform: rotate(180deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
 @media screen and (min-width: 650px) {
     .options-row {
         overflow-x: auto;
@@ -340,5 +405,7 @@
         width: 35vw;
         max-width: 100%;
     }
-    
+    .process-modal__container {
+        margin-left:calc(clamp(200px, 20vw, 500px) + 40px);
+    }
 }

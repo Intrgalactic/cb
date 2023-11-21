@@ -1,11 +1,17 @@
-import { useReducer } from "react";
+import { memo, useEffect, useReducer, useRef, useState } from "react";
 import ServiceInputSection from "src/layouts/dashboard/services/serviceInputSection";
 import FileInputSection from "../files/fileInputSection";
 import AudioRecorder from "./recordings/audioRecorder";
 import OptionsSelectSection from "../multipleServices/optionsSelectSection";
 import ProcessBtn from "../processBtn";
+import ProcessModal from "../process/processModal";
+import { processModals } from "src/utilities/utils";
+import { SessionStorage } from "src/utilities/sessionStorage";
+import axios from "axios";
+import { getFileFromBlobUrl } from "src/utilities/files";
+import { fetchService } from "src/utilities/services";
 
-const STTServiceInputSection = () => {
+const STTServiceInputSection = memo(() => {
     const STTInitialState = {
         recordingFiles: undefined,
         selectedRecordingFile: undefined,
@@ -23,17 +29,35 @@ const STTServiceInputSection = () => {
         }
     }
     const [STTState, STTDispatch] = useReducer(STTReducer, STTInitialState);
-
+    const [isProcessing,setIsProcessing] = useState(false);
+    const abortRef = useRef();
     const setFile = (file) => {
-        STTDispatch({type:"file",payload: file[0]})
+        STTDispatch({type:"file",payload: file})
     }
     const setRecordingFile = (file) => {
         const recordings = STTState.recordingFiles !== undefined ? STTState.recordingFiles : [];
-        recordings.push(file[0]);
+        recordings.push(file);
         STTDispatch({type:"recordingFiles",payload: recordings});
     }
-    const getQueryResponse = () => {
-
+    const getQueryResponse = async () => {
+        const reqBody = {
+            languageCode: 'English',
+            summarizeOn: SessionStorage.getData("Summarization") || false,
+            topicsOn: SessionStorage.getData("Topics") || false,
+            diarizeOn: SessionStorage.getData("Diarization") || false,
+            audioEncoding: SessionStorage.getData("Output") || "txt",
+            subtitlesON: SessionStorage.getData("Timestamps") || false,
+            punctuation: SessionStorage.getData("Punctuation") || true
+        }
+        STTState.selectedRecordingFile ? Object.assign(reqBody,{file: STTState.recordingFiles[STTState.selectedRecordingFile]}) : 
+        STTState.recordingFiles ? Object.assign(reqBody,{file: STTState.recordingFiles[0]}) : Object.assign(reqBody,{file: STTState.file});
+        setIsProcessing(true);
+        reqBody.file = await getFileFromBlobUrl(reqBody.file);
+        await fetchService(reqBody,"api/speech-to-text",setIsProcessing,SessionStorage.getData("Output").toLowerCase() || "txt",STTDispatch,abortRef);
+    }
+    const cancelRequest = () => {
+        abortRef.current.abort();
+        setIsProcessing(false);
     }
 
     const categoriesRows = [[{
@@ -74,6 +98,13 @@ const STTServiceInputSection = () => {
         "audio/opus",    // Opus
         "audio/L16"      // PCM
     ]
+    useEffect(() => {
+        return () => {
+            if (abortRef.current) {
+                abortRef.current.abort();
+            }
+        }
+    })
     return (
         <div className="stt-service-input-section service-main-input-section">
             <ServiceInputSection>
@@ -86,10 +117,11 @@ const STTServiceInputSection = () => {
                     setFile={setFile}
                 />
             </ServiceInputSection>
-            <ProcessBtn enabled={STTState.recordingFiles !== undefined || STTState.file !== undefined} btnText="Transcribe" process={getQueryResponse} />
+            <ProcessBtn disabled={STTState.recordingFiles === undefined && STTState.file === undefined} btnText="Transcribe" process={getQueryResponse} />
             <OptionsSelectSection heading="Speech To Text Options" categoriesRows={categoriesRows}/>
+            {isProcessing === true && <ProcessModal cancel={cancelRequest} processObj={processModals.speechToText}/>}
         </div>
     )
-}
+})
 
 export default STTServiceInputSection;

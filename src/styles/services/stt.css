@@ -9,9 +9,10 @@
 
 .record-btn {
     width: 150px;
-    height: 40px;
+    height: 50px;
     border-radius: 10px;
     background-color: var(--blue);
+    cursor: pointer;
     color: white;
     font-family: NexaHeavy;
     border: 0;

@@ -26,8 +26,8 @@ const RegisterAuth = () => {
         const formValidity = validateFormInputs(formInputs);
         if (formValidity.isValid) {
             setIsProcessing(true);
-            createUserWithEmailAndPassword(auth, emailRef.current.value, passwordRef.current.value).then((user) => {
-                AxiosFacade.createUser("user", usernameRef.current.value, emailRef.current.value).then(() => {
+            createUserWithEmailAndPassword(auth, emailRef.current.value, passwordRef.current.value).then(async (user) => {
+                await AxiosFacade.createUser("user", usernameRef.current.value, emailRef.current.value).then(() => {
                     navigate('/choose-package');
                     setIsProcessing(false);
                 }).catch(err => {

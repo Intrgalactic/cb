@@ -6,7 +6,7 @@ import 'src/styles/services/stt.css';
 const SpeechToText = () => {
     const windowSize = useWindowSize();
     return (
-        <div className="speech-to-speech service-page">
+        <div className="speech-to-text service-page">
             <NavDetector windowSize={windowSize} />
             <SpeechToTextPanel />
         </div>

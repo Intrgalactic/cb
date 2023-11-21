@@ -4,22 +4,22 @@ import { useNavigate } from "react-router-dom";
 
 const MobileNavLink = ({ src, alt, menu,id,linkListChanged,link }) => {
     const linksRef = useRef();
-    const [isOpened, setIsOpened] = useState(false);
+    const [isOpened, setIsOpened] = useState();
     const navigate = useNavigate();
     useEffect(() => {
+
         if (linksRef.current && !linksRef.current.classList.contains("mobile-nav-link__inner-links")) linksRef.current.classList.add("mobile-nav-link__inner-links")
     },[])
     const toggleMenu = () => {
         setIsOpened(!isOpened);
     }
     useEffect(() => {
-        if (linksRef.current) {
+        if (linksRef.current    ) {
             isOpened ? linksRef.current.classList.add('visible-mobile-nav-link__inner-links') : linksRef.current.classList.remove('visible-mobile-nav-link__inner-links');
         }
     }, [isOpened])
     useEffect(() => {
         if (linkListChanged !== false && linksRef.current) {
-            console.log(linkListChanged,id);
             linkListChanged !== id && linksRef.current.classList.contains('visible-mobile-nav-link__inner-links') && toggleMenu();
         }
     },[linkListChanged])

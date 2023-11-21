@@ -570,10 +570,14 @@ header {
      }
      .newsletter img {
         align-self: center;
+     }  
+     .services-section {
+        background: #0A001F;
      }
-
 }
-
+.services-section {
+    background: #0A001F;
+ }
 @media screen and (min-width:1024px) {
     header {
         height: clamp(80px,10vh,140px);

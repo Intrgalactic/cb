@@ -1,11 +1,11 @@
 import FilesInput from "../files/voiceCloning/filesInput";
 import ProcessBtn from "../processBtn";
-import { useReducer } from "react";
+import { memo, useReducer, useState } from "react";
 import ServiceInputSection from "src/layouts/dashboard/services/serviceInputSection";
 import VCFileInputSection from "../files/voiceCloning/vcFileInputSection";
 import ServiceCheckbox from "../serviceCheckbox";
 
-const VCServiceInputSection = () => {
+const VCServiceInputSection = memo(() => {
     const VCInitialState = {
         files: [],
         type: "Audio",
@@ -21,6 +21,7 @@ const VCServiceInputSection = () => {
         }
     }
     const [VCState, VCDispatch] = useReducer(VCReducer, VCInitialState);
+    const [isProcessing,setIsProcessing] = useState(false);
     const setFile = (file) => {
         const files = VCState.files;
         if (file.length === 1 && files.length < 20 && (files.length + file.length <= 20)) {
@@ -69,8 +70,9 @@ const VCServiceInputSection = () => {
             </ServiceInputSection>
             <ServiceCheckbox isChecked={VCState.isChecked} setIsChecked={() => {VCDispatch({type:"isChecked",payload: !VCState.isChecked})}} checkText={`I hereby confirm that i am the owner of the voice or have obtained all necessary permissions and rights to use the voice`}/>
             <ProcessBtn btnText="Clone" process={() => { }} enabled={VCState.files.length !== 0 && VCState.files.length <= 20 && VCState.isChecked === true ? true : false} />
+            {isProcessing === true && <ProcessModal processObj={processModals.voiceCloning}/>}
         </div>
     )
-}
+});
 
 export default VCServiceInputSection;

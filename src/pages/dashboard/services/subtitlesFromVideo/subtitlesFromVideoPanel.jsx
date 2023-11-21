@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { memo} from "react";
 import SFVServiceInputSection from "src/components/services/subtitlesFromVideo/sfvServiceInputSection";
 import ServiceHeading from "src/layouts/dashboard/services/serviceHeading";
 

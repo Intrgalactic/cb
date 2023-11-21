@@ -35,6 +35,7 @@ const AudioRecorder = ({ setRecordingFile, recordingFiles,selectedRecordingFile,
             setRecordingFile(audioURL);
         }
     }, [audioURL])
+    console.log(audioURL,55);
     return (
         <div className="audio-recorder__container">
             <ServiceMainInput heading="Record Your Voice">

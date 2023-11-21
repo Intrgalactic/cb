@@ -16,6 +16,7 @@ import TextToSpeech from "./pages/dashboard/services/textToSpeech/textToSpeech"
 import SpeechToText from "./pages/dashboard/services/speechToText/speechToText"
 import VoiceCloning from "./pages/dashboard/services/voiceCloning/voiceCloning"
 import SubtitlesFromVideo from "./pages/dashboard/services/subtitlesFromVideo/subtitlesFromVIdeo"
+import ImageEnhancer from "./pages/dashboard/services/imageEnhancer/imageEnhancer"
 
 const router = createBrowserRouter([
     {
@@ -36,23 +37,27 @@ const router = createBrowserRouter([
     },
     {
         path: "/dashboard",
-        element: <Dashboard/>,
+        element: <Dashboard />,
     },
     {
         path: "/dashboard/services/text-to-speech",
-        element: <TextToSpeech/>
+        element: <TextToSpeech />
     },
     {
         path: "/dashboard/services/speech-to-text",
-        element: <SpeechToText/>
+        element: <SpeechToText />
     },
     {
         path: "/dashboard/services/voice-cloning",
-        element: <VoiceCloning/>
+        element: <VoiceCloning />
     },
     {
         path: "/dashboard/services/subtitles-from-video",
-        element: <SubtitlesFromVideo/>
+        element: <SubtitlesFromVideo />
+    },
+    {
+        path: "/dashboard/services/image-enhancer",
+        element: <ImageEnhancer />
     }
 ])
 
@@ -64,17 +69,18 @@ const App = () => {
         const fontA = new FontFaceObserver('NexaRegular');
         const fontB = new FontFaceObserver('NexaHeavy');
         Promise.all([fontA.load(), fontB.load()]).then(() => {
-            if (currentUser) {
-                AxiosFacade.getJwtToken().then((authenticated) => {
-                    if (!authenticated) {
-                        setCurrentUser(false);
-                    }
-                    setAssetsLoaded(true);
-                })
-                console.log('triege');
-            }
-            onAuthStateChanged(auth, async (user) => {
-                if (user) {
+            setAssetsLoaded(true);
+        })
+    }, []);
+
+    onAuthStateChanged(auth, async (user) => {
+        if (user) {
+            AxiosFacade.getJwtToken().then(async (authenticated) => {
+                console.log(authenticated);
+                if (!authenticated) {
+                    setCurrentUser(false);
+                }
+                else {
                     const dbUser = await AxiosFacade.getUser(user.email, false);
                     if (dbUser.isPaying === "true") {
                         setIsPaying(true);
@@ -84,17 +90,15 @@ const App = () => {
                     }
                     setCurrentUser(user);
                 }
-                else {
-                    setIsPaying(false);
-                    setCurrentUser(false);
-                }
-                setAssetsLoaded(true);
+            }).catch(err => {
+                console.log(err);
             })
-        }).catch(() => {
-            setAssetsLoaded(true);
-        });
-    }, []);
-
+        }
+        else {
+            setIsPaying(false);
+            setCurrentUser(false);
+        }
+    })
     return (
         <AuthContext.Provider value={currentUser}>
             <UserSubscriptionContext.Provider value={isPaying}>

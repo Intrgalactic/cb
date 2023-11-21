@@ -30,20 +30,27 @@
     margin:0;
     max-width: 100vw;
   }
+  body::-webkit-scrollbar {
+    width: 0;
+    display: none;
+  }
+  
   .loading-modal {
     position: fixed;
     height: 100vh;
     background-color: rgba(9, 0, 29, 0.6);
     display: flex;
+    transition-duration:300ms;
+    opacity: 0;
+    pointer-events: none;
     justify-content: center;
     align-items: center;
     z-index: 999;
     width: 100vw;
     top:0;
-    display: none;
   }
   .visible-loading-modal {
-    display: flex;
+    opacity: 1;
   }
   .loading-modal img {
     animation-name: loader;

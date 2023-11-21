@@ -1,11 +1,13 @@
 import ServiceInputSection from "src/layouts/dashboard/services/serviceInputSection"
 import OptionsSelectSection from "../multipleServices/optionsSelectSection"
-import { useReducer } from "react"
+import { memo, useReducer, useState } from "react"
 import FilesInput from "../files/voiceCloning/filesInput"
 import FileInputSection from "../files/fileInputSection"
 import ProcessBtn from "../processBtn"
+import ProcessModal from "../process/processModal"
+import { processModals } from "src/utilities/utils"
 
-const SFVServiceInputSection = () => {
+const SFVServiceInputSection = memo(() => {
     const SFVInitialState = {
         type: "Video",
         fileToDownload: undefined,
@@ -20,6 +22,7 @@ const SFVServiceInputSection = () => {
         }
     }
     const [SFVState, SFVDispatch] = useReducer(SFVReducer, SFVInitialState);
+    const [isProcessing,setIsProcessing] = useState(false);
     const categoriesRows = [[{
         heading: "Diarization",
         options: ["Enable", "Disable"]
@@ -73,8 +76,9 @@ const SFVServiceInputSection = () => {
             </ServiceInputSection>
             <ProcessBtn btnText="Retrieve" process={() => {}} enabled={SFVState.file !== undefined}/>
             <OptionsSelectSection heading="Speech To Text Options" categoriesRows={categoriesRows} />
+            {isProcessing === true && <ProcessModal processObj={processModals.subtitlesFromVideo}/>}
         </div>
     )
-}
+});
 
 export default SFVServiceInputSection;

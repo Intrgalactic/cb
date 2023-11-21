@@ -1,21 +1,30 @@
-import microphone from 'src/assets/images/microphone.png';
-import quotes from 'src/assets/images/quotes.png';
-import video from 'src/assets/images/enhance.png';
-import homeIcon from 'src/assets/images/icons/home.png';
-import dashboardIcon from 'src/assets/images/icons/dashboard.png';
-import microphoneIcon from 'src/assets/images/icons/microphone.png';
-import videoIcon from 'src/assets/images/icons/video.png';
-import settingsIcon from 'src/assets/images/icons/settings.png';
-import camera from 'src/assets/images/camera.png';
-import subtitles from 'src/assets/images/subtitles.png';
-import clone from 'src/assets/images/clone.png';
+
+import whiteHomeIcon from 'src/assets/images/icons/home.png';
+import whiteDashboardIcon from 'src/assets/images/icons/dashboard.png';
+import whiteMicrophoneIcon from 'src/assets/images/icons/microphone.png';
+import whiteVideoIcon from 'src/assets/images/icons/video.png';
+import whiteSettingsIcon from 'src/assets/images/icons/settings.png';
+
+import gradientMicrophone from 'src/assets/images/microphone.png';
+import gradientCamera from 'src/assets/images/camera.png';
+import gradientSubtitles from 'src/assets/images/subtitles.png';
+import gradientClone from 'src/assets/images/clone.png';
+import gradientImageEnhance from 'src/assets/images/image-enhance.png';
+import gradientQuotes from 'src/assets/images/quotes.png';
+import gradientVideoEnhance from 'src/assets/images/enhance.png';
+
+import serviceMicrophone from 'src/assets/images/icons/white-services/microphone.png';
+import serviceClone from 'src/assets/images/icons/white-services/clone.png';
+import serviceImage from 'src/assets/images/icons/white-services/image.png';
+import serviceQuotes from 'src/assets/images/icons/white-services/quotes.png';
+import serviceCamera from 'src/assets/images/icons/white-services/camera.png';
 
 export const pricingItems = [{
     heading: "Starter",
     price: "35$",
     href: "/checkout?package=starter",
     btn: "Get Started Now",
-    src: microphone,
+    src: gradientMicrophone,
     alt: "microphone",
     description: "Unlock Your Voice: Get Started with Seamless Speech Conversion",
     items: [
@@ -30,7 +39,7 @@ export const pricingItems = [{
     heading: "Essential",
     price: "50$",
     btn: "Upgrade Today",
-    src: quotes,
+    src: gradientQuotes,
     alt: "quotes",
     href: "/checkout?package=essential",
     description: "Empower Your Content: Elevate Your Creations with Essential Tools",
@@ -48,7 +57,7 @@ export const pricingItems = [{
     heading: "Professional",
     price: "80$",
     btn: "Unlock More Power",
-    src: video,
+    src: gradientVideoEnhance,
     alt: "video",
     href: "/checkout?package=professional",
     description: "Amplify Your Projects: Transform Your Creations with Our AI-Enhanced Professional Toolkit",
@@ -70,65 +79,65 @@ export const pricingItems = [{
 export const dashboardNavLinks = [
     {
         name: "Home",
-        img: homeIcon,
+        img: whiteHomeIcon,
         link: "/"
     },
     {
         name: "Dashboard",
-        img: dashboardIcon,
+        img: whiteDashboardIcon,
         link: "/dashboard"
     },
     {
         name: "Talk & Text",
-        img: microphoneIcon,
+        img: whiteMicrophoneIcon,
         id:0,
         menu: [{
             name:"Text To Speech",
             link: "/dashboard/services/text-to-speech",
             alt: "text to speech",
-            img: microphone,
+            img: gradientMicrophone,
         },
         {
             name:"Speech To Text",
             link: "/dashboard/services/speech-to-text",
             alt: "speech to text",
-            img: quotes
+            img: gradientQuotes
         },
         {
             name: "Voice Cloning",
             link: "/dashboard/services/voice-cloning",
             alt: "voice cloning",
-            img: clone,
+            img: gradientClone,
         }]
     },
     {
         name: "Videos",
-        img: videoIcon,
+        img: whiteVideoIcon,
         id: 1,
         menu: [
             {
                 name:"Subtitles To Video",
                 link: "/dashboard/services/subtitles-to-video",
                 alt: "subtitles to video",
-                img: subtitles
+                img: gradientSubtitles
             },
             {
                 name:"Subtitles From Video",
                 link: "/dashboard/services/subtitles-from-video",
                 alt: "subtitles from video",
-                img: camera
+                img: gradientCamera
             },
             {
-                name: "Video Enhancer",
-                link: "/dashboard/services/video-enhancer",
-                alt: "video enhance",
-                img: video
+                name: "Image Enhancer",
+                link: "/dashboard/services/image-enhancer",
+                alt: "image enhance",
+                img: gradientImageEnhance
             }
         ],
     },
     {   
         name: "Settings",
-        img: settingsIcon,
+        img: whiteSettingsIcon,
         link: "/dashboard/settings"
     },
 ];
@@ -480,3 +489,32 @@ export const availableVoices = [
         description: "Old british man. Deep voice for a good storyteller."
       }
 ]
+
+export const processModals = {
+  textToSpeech: {
+    src:serviceMicrophone,
+    alt: "microphone",
+    processText: "We Are Synthesizing Your Text"
+  },
+  speechToText: {
+    src: serviceQuotes,
+    alt: "quotes",
+    processText: "We Are Translating Your Speech"
+  },
+  voiceCloning: {
+    src:serviceClone,
+    alt: "printer",
+    processText: "We Are Cloning Your Voice"
+  },
+  subtitlesFromVideo: {
+    src:serviceCamera,
+    alt: "camera",
+    processText: "We Are Gathering Your Subtitles",
+  },
+  imageEnhancer: {
+    src:serviceImage,
+    alt: "image",
+    processText: "We Are Enhancing Your Image"
+  }
+
+}
