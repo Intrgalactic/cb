@@ -54,7 +54,7 @@ header {
 .hero {
     padding-inline:5vw;
     padding-block:70px;
-    height: calc(100vh - 70px);
+    height: calc(100vh - 140px);
     display: grid;
     align-items: center;
     color:white;
