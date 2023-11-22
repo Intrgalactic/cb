@@ -1,12 +1,12 @@
 import loader from 'src/assets/images/loader.png';
 
-const FileDownload = ({fileToDownload}) => {
+const FileDownload = ({fileToDownload,fileToDownloadExtension}) => {
     const handleDownload = () => {
-
+        console.log(fileToDownload);
         const url = URL.createObjectURL(fileToDownload);
         const link = document.createElement('a');
         link.href = url;
-        link.download = filename;
+        link.download = `output.${fileToDownloadExtension}`;
         document.body.appendChild(link);
         link.click();
         link.remove();

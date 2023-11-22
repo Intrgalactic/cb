@@ -61,7 +61,9 @@ header {
     background-image: url('src/assets/images/mobile-hero.jpg');
     background-size: 100% 100%;
 }
-
+.compare-service__slider div[data-rcs="root"] {
+    border-radius: 15px;
+}
 .hero__container {
     text-align: center;
     font-family: NexaHeavy;
@@ -105,7 +107,6 @@ header {
     padding-inline:5%;
     color:white;
     padding-block: 30px;
-    border-top: 2px solid var(--header-blue);
 }
 .single-service {
     display: flex;
@@ -662,10 +663,18 @@ header {
         width: 90%;
     }
     .bottom-services__branch .single-service__aside {
-        width: 40vw;
+        width: 35vw;
     }
     .bottom-services__branch .service-video {
         height: 300px;
+    }
+    .service-section__heading {
+        width: 60%;
+        margin:auto;
+    }
+    .bottom-services {
+        width: 80vw;
+        margin:auto;
     }
     .service-section__heading p {
         font-size: 25px;
@@ -688,6 +697,10 @@ header {
     .testimonial-description::-webkit-scrollbar {
         background-color: var(--blue);
         width: 5px;
+        border-radius: 5px;
+    }
+    .testimonial-description::-webkit-scrollbar-thumb {
+        background-color: #004EE3;
         border-radius: 5px;
     }
     .newsletter img {
@@ -723,7 +736,7 @@ header {
     }
     .services__container .single-service {
         flex-direction: row;
-        width: 90vw;
+        width: 80vw;
         align-items: center;
         max-width: 1920px;
         margin:auto;

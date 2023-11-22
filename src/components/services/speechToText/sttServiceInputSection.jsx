@@ -7,9 +7,8 @@ import ProcessBtn from "../processBtn";
 import ProcessModal from "../process/processModal";
 import { processModals } from "src/utilities/utils";
 import { SessionStorage } from "src/utilities/sessionStorage";
-import axios from "axios";
 import { getFileFromBlobUrl } from "src/utilities/files";
-import { fetchService } from "src/utilities/services";
+import { fetchService, removeServiceVariables } from "src/utilities/services";
 
 const STTServiceInputSection = memo(() => {
     const STTInitialState = {
@@ -18,6 +17,7 @@ const STTServiceInputSection = memo(() => {
         file: undefined,
         type: "Audio",
         fileToDownload: undefined,
+        fileToDownloadExtension: undefined
     }
 
     const STTReducer = (state, action) => {
@@ -42,18 +42,18 @@ const STTServiceInputSection = memo(() => {
     const getQueryResponse = async () => {
         const reqBody = {
             languageCode: 'English',
-            summarizeOn: SessionStorage.getData("Summarization") || false,
-            topicsOn: SessionStorage.getData("Topics") || false,
-            diarizeOn: SessionStorage.getData("Diarization") || false,
+            summarizeOn: SessionStorage.getData("Summarization") || "Disable",
+            topicsOn: SessionStorage.getData("Topics") || "Disable",
+            diarizeOn: SessionStorage.getData("Diarization") || "Disable",
             audioEncoding: SessionStorage.getData("Output") || "txt",
-            subtitlesON: SessionStorage.getData("Timestamps") || false,
-            punctuation: SessionStorage.getData("Punctuation") || true
+            subtitlesOn: SessionStorage.getData("Timestamps") || "Disable",
+            punctuation: SessionStorage.getData("Punctuation") || "Enable"
         }
         STTState.selectedRecordingFile ? Object.assign(reqBody,{file: STTState.recordingFiles[STTState.selectedRecordingFile]}) : 
-        STTState.recordingFiles ? Object.assign(reqBody,{file: STTState.recordingFiles[0]}) : Object.assign(reqBody,{file: STTState.file});
+        STTState.recordingFiles ? Object.assign(reqBody,{file: STTState.recordingFiles[0]}) : Object.assign(reqBody,{file: STTState.file[0]});
         setIsProcessing(true);
         reqBody.file = await getFileFromBlobUrl(reqBody.file);
-        await fetchService(reqBody,"api/speech-to-text",setIsProcessing,SessionStorage.getData("Output").toLowerCase() || "txt",STTDispatch,abortRef);
+        await fetchService(reqBody,"api/speech-to-text",setIsProcessing,SessionStorage.getData("Output") ? SessionStorage.getData("Output").toLowerCase() : "txt",STTDispatch,abortRef);
     }
     const cancelRequest = () => {
         abortRef.current.abort();
@@ -103,6 +103,8 @@ const STTServiceInputSection = memo(() => {
             if (abortRef.current) {
                 abortRef.current.abort();
             }
+            const variables = ["Punctuation","Output","Topics","Timestamps","Summarization","Diarization"];
+            removeServiceVariables(variables);
         }
     })
     return (
@@ -112,12 +114,13 @@ const STTServiceInputSection = memo(() => {
                 <FileInputSection
                     fileTypes={fileTypes}
                     type={STTState.type}
+                    fileToDownloadExtension={STTState.fileToDownloadExtension}
                     files={STTState.file !== undefined ? STTState.file : STTState.recordingFiles !== undefined ? STTState.recordingFiles : undefined}
                     fileToDownload={STTState.fileToDownload}
                     setFile={setFile}
                 />
             </ServiceInputSection>
-            <ProcessBtn disabled={STTState.recordingFiles === undefined && STTState.file === undefined} btnText="Transcribe" process={getQueryResponse} />
+            <ProcessBtn enabled={STTState.recordingFiles !== undefined || STTState.file !== undefined} btnText="Transcribe" process={getQueryResponse} />
             <OptionsSelectSection heading="Speech To Text Options" categoriesRows={categoriesRows}/>
             {isProcessing === true && <ProcessModal cancel={cancelRequest} processObj={processModals.speechToText}/>}
         </div>

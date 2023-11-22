@@ -116,9 +116,12 @@ body {
     border:0;
     margin-block:15px;
 }
-
 .google-auth-btn {
     background-color: white;
+}
+.google-auth-btn p {
+    color:black;
+    opacity: 1;
 }
 
 .apple-auth-btn {

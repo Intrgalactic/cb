@@ -4,7 +4,7 @@ import Header from 'src/layouts/header/header';
 import Hero from 'src/layouts/home/hero/hero';
 import Footer from 'src/layouts/footer/footer';
 import { useEffect, useRef, useState } from 'react';
-import { getBackgroundOnSizeChange, loadBackgrounds } from 'src/utilities/assetsLoaders';
+import { checkWindowSizeChange, getBackgroundOnSizeChange, loadBackgrounds } from 'src/utilities/assetsLoaders';
 import LoadingModal from 'src/layouts/loadingModal';
 import { useWindowSize } from '@uidotdev/usehooks';
 import mobileHero from 'src/assets/images/mobile-hero.jpg';
@@ -24,26 +24,25 @@ const backgrounds = [
 ];
 
 const Home = () => {
-  const [backgroundsLoaded, setBackgroundsLoaded] = useState(false);
+  const [layoutsLoaded, setLayoutsLoaded] = useState({
+    mobile: false,
+    medium: false,
+    full: false
+  });
   const windowSize = useWindowSize();
   const prevWindowSize = useRef(windowSize.width);
+  const currentLayout = useRef();
 
   useEffect(() => {
-    const checkWindowSizeChange = () => {
-      const crossed650 = (windowSize.width >= 650 && prevWindowSize.current < 650) || (windowSize.width < 650 && prevWindowSize.current >= 650) || (windowSize.width < 650 && prevWindowSize.current === windowSize.width);
-      const crossed1024 = (windowSize.width >= 1024 && prevWindowSize.current < 1024) || (windowSize.width < 1024 && prevWindowSize.current >= 1024) || (windowSize.width < 650 && prevWindowSize.current === windowSize.width);
-      return crossed650 || crossed1024;
-    };
-
-    if (checkWindowSizeChange()) {
+    if (checkWindowSizeChange(windowSize,currentLayout,prevWindowSize) && currentLayout.current !== true) {
       const backgroundImagesUrls = getBackgroundOnSizeChange(backgrounds, windowSize);
-      loadBackgrounds(setBackgroundsLoaded, backgroundImagesUrls);
+      loadBackgrounds(setLayoutsLoaded, backgroundImagesUrls,layoutsLoaded,currentLayout.current);
     }
     prevWindowSize.current = windowSize.width;
-  }, [setBackgroundsLoaded, windowSize.width])
+  }, [setLayoutsLoaded, windowSize.width])
   return (
     <>
-      {backgroundsLoaded ?
+      {layoutsLoaded ?
         <>
           <Header />
           <Hero />

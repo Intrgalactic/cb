@@ -10,7 +10,7 @@ import "src/styles/dashboard.css";
 import mobileDashboard from 'src/assets/images/mobile-dashboard.jpg';
 import mediumDashboard from 'src/assets/images/medium-dashboard.jpg';
 import dashboard from 'src/assets/images/dashboard.jpg'
-import { getBackgroundOnSizeChange, loadBackgrounds } from "src/utilities/assetsLoaders";
+import { checkWindowSizeChange, getBackgroundOnSizeChange, loadBackgrounds } from "src/utilities/assetsLoaders";
 import LoadingModal from "src/layouts/loadingModal";
 import NavDetector from "./navDetector";
 
@@ -20,26 +20,24 @@ const Dashboard = () => {
     const windowSize = useWindowSize();
     const navigate = useNavigate();
     const user = useContext(AuthContext);
-    const [backgroundsLoaded, setBackgroundsLoaded] = useState(false);
+    const [layoutsLoaded, setLayoutsLoaded] = useState({
+        mobile: false,
+        medium: false,
+        full: false
+      });
     const prevWindowSize = useRef(windowSize.width);
-
+    const currentLayout = useRef();
     useEffect(() => {
-        const checkWindowSizeChange = () => {
-            const crossed650 = (windowSize.width >= 650 && prevWindowSize.current < 650) || (windowSize.width < 650 && prevWindowSize.current >= 650) || (windowSize.width < 650 && prevWindowSize.current === windowSize.width);
-            const crossed1024 = (windowSize.width >= 1024 && prevWindowSize.current < 1024) || (windowSize.width < 1024 && prevWindowSize.current >= 1024) || (windowSize.width < 650 && prevWindowSize.current === windowSize.width);
-            return crossed650 || crossed1024;
-        };
-
-        if (checkWindowSizeChange()) {
+        if (checkWindowSizeChange(windowSize,currentLayout,prevWindowSize) && currentLayout.current !== true) {
             const backgroundImagesUrls = getBackgroundOnSizeChange(backgrounds, windowSize);
-            loadBackgrounds(setBackgroundsLoaded, backgroundImagesUrls);
+            loadBackgrounds(setLayoutsLoaded, backgroundImagesUrls);
         }
         prevWindowSize.current = windowSize.width;
-    }, [setBackgroundsLoaded, windowSize.width])
+    }, [setLayoutsLoaded, windowSize.width])
     
     return (
         <>
-            {backgroundsLoaded ?
+            {layoutsLoaded ?
                 <div className="dashboard">
                     <NavDetector windowSize={windowSize}/>
                     <DashboardPanel />

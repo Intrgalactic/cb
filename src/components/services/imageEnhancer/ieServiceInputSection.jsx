@@ -1,4 +1,4 @@
-import { memo, useReducer, useState } from "react";
+import { memo, useEffect, useReducer, useRef, useState } from "react";
 import ServiceInputSection from "src/layouts/dashboard/services/serviceInputSection";
 import FileInputSection from "../files/fileInputSection";
 import ProcessBtn from "../processBtn";
@@ -8,6 +8,8 @@ import { SessionStorage } from "src/utilities/sessionStorage";
 import { processModals } from "src/utilities/utils";
 import ProcessModal from "../process/processModal";
 import axios from "axios";
+import { fetchService, removeServiceVariables } from "src/utilities/services";
+import { getFileFromBlobUrl } from "src/utilities/files";
 
 const IEServiceInputSection = memo(() => {
     const IEInitialState = {
@@ -24,6 +26,7 @@ const IEServiceInputSection = memo(() => {
     }
     const [IEState, IEDispatch] = useReducer(IEReducer, IEInitialState);
     const [isProcessing, setIsProcessing] = useState(false);
+    const abortRef = useRef();
     const setFile = (file) => {
         IEDispatch({ type: "file", payload: file[0] });
     }
@@ -52,31 +55,37 @@ const IEServiceInputSection = memo(() => {
     ]
 
     const getQueryResponse = async () => {
-        var dataObj = {
+        const reqBody = {
             file: IEState.file,
         }
+        const abortController = new AbortController();
+        abortRef.current = abortController;
         for (let categoryRow of categoriesRows) {
             for (let category of categoryRow) {
                 const data = SessionStorage.getData(category.heading);
                 if (data === null || data === category.heading) {
-                    dataObj = Object.assign({ [category.heading[0].toLowerCase() + category.heading.replace(/ /g, '').slice(1)]: "disable" }, dataObj);
+                    Object.assign(reqBody,{ [category.heading[0].toLowerCase() + category.heading.replace(/ /g, '').slice(1)]: "disable" });
                 }
                 else {
-                    dataObj = Object.assign({ [category.heading[0].toLowerCase() + category.heading.replace(/ /g, '').slice(1)]: data.toLowerCase() }, dataObj);
+                    Object.assign(reqBody,{ [category.heading[0].toLowerCase() + category.heading.replace(/ /g, '').slice(1)]: data.toLowerCase() });
                 }
             }
         }
-        const formData = new FormData;
-        for (const [key,value] of Object.entries(dataObj)) {
-            formData.append([key],value);
-        }
-        await axios.post(`${import.meta.env.VITE_SERVER_FETCH_URL}api/image-enhance`, formData, {
-            headers: {
-                'Content-Type': "application/x-www-form-urlencoded"
-            }
-        })
+        reqBody.file = await getFileFromBlobUrl(reqBody.file);
+        setIsProcessing(true);
+        console.log(reqBody);
+        await fetchService(reqBody,"api/image-enhance",setIsProcessing,reqBody.file.type.split("/").pop(),IEDispatch,abortRef);
     }
-
+    useEffect(() => {
+        return () => {
+            const variables = ["Upscale","Low Light Enhancement","Deblur","Face Enhancement","Denoise"];
+            removeServiceVariables(variables);
+        }
+    })
+    const cancelRequest = () => {
+        abortRef.current.abort();
+        setIsProcessing(false);
+    }
     return (
         <div className="ie-service-input-section service-main-input-section">
             <ServiceInputSection>
@@ -89,9 +98,9 @@ const IEServiceInputSection = memo(() => {
                     setFile={setFile}
                 />
             </ServiceInputSection>
-            <ProcessBtn disabled={IEState.file === undefined ? true : false} btnText="Ehnance" process={getQueryResponse} />
+            <ProcessBtn enabled={IEState.file !== undefined ? true : false} btnText="Ehnance" process={getQueryResponse} />
             <OptionsSelectSection heading="Image Enhance Options" categoriesRows={categoriesRows} />
-            {isProcessing === true && <ProcessModal processObj={processModals.imageEnhancer} />}
+            {isProcessing === true && <ProcessModal cancel={cancelRequest} processObj={processModals.imageEnhancer} />}
         </div>
     )
 });

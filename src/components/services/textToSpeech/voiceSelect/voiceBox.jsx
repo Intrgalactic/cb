@@ -1,6 +1,7 @@
-import { memo } from "react";
+import { memo} from "react";
+import VoiceSample from "./voiceSampleBtn";
 
-const VoiceBox = memo(function VoiceBox({voice,setSelectedVoice,selectedVoice}) {
+const VoiceBox = memo(function VoiceBox({ voice, setSelectedVoice, selectedVoice }) {
     const selectVoice = () => {
         setSelectedVoice(voice)
     }
@@ -13,12 +14,10 @@ const VoiceBox = memo(function VoiceBox({voice,setSelectedVoice,selectedVoice}) 
                 <button className="voice-box-btn" onClick={selectVoice}>
                     {selectedVoice !== undefined && selectedVoice.name === voice.name ? "Using" : "Use"}
                 </button>
-                <button className="voice-box-btn">
-                    Sample
-                </button>
+                <VoiceSample name={voice.name}/>
             </div>
         </div>
-    ) 
+    )
 });
 
 export default VoiceBox;

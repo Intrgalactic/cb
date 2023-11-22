@@ -1,10 +1,9 @@
 import { useContext, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { AuthContext } from "src/context/authContext";
 import 'src/styles/login.css';
 import { useWindowSize } from "@uidotdev/usehooks";
-import { getBackgroundOnSizeChange, loadBackgrounds } from "src/utilities/assetsLoaders";
+import { checkWindowSizeChange, getBackgroundOnSizeChange, loadBackgrounds } from "src/utilities/assetsLoaders";
 
 import mobileLogin from 'src/assets/images/mobile-login.png';
 import mediumLogin from 'src/assets/images/medium-login.png';
@@ -18,24 +17,21 @@ const backgrounds = [[mobileLogin], [mediumLogin], [login]];
 
 const Login = () => {
     const user = useContext(AuthContext);
-    const navigate = useNavigate();
-    const [backgroundsLoaded, setBackgroundsLoaded] = useState(false);
+    const [layoutsLoaded, setLayoutsLoaded] = useState({
+        mobile: false,
+        medium: false,
+        full: false
+      });
     const windowSize = useWindowSize();
     const prevWindowSize = useRef(windowSize.width);
-
+    const currentLayout = useRef();
     useEffect(() => {
-        const checkWindowSizeChange = () => {
-            const crossed650 = (windowSize.width >= 650 && prevWindowSize.current < 650) || (windowSize.width < 650 && prevWindowSize.current >= 650) || (windowSize.width < 650 && prevWindowSize.current === windowSize.width);
-            const crossed1024 = (windowSize.width >= 1024 && prevWindowSize.current < 1024) || (windowSize.width < 1024 && prevWindowSize.current >= 1024) || (windowSize.width < 650 && prevWindowSize.current === windowSize.width);
-            return crossed650 || crossed1024;
-        };
-
-        if (checkWindowSizeChange()) {
+        if (checkWindowSizeChange(windowSize,currentLayout,prevWindowSize) && currentLayout.current !== true) {
             const backgroundImagesUrls = getBackgroundOnSizeChange(backgrounds, windowSize);
-            loadBackgrounds(setBackgroundsLoaded, backgroundImagesUrls);
+            loadBackgrounds(setLayoutsLoaded, backgroundImagesUrls,layoutsLoaded,currentLayout.current);
         }
         prevWindowSize.current = windowSize.width;
-    }, [setBackgroundsLoaded, windowSize.width])
+    }, [setLayoutsLoaded, windowSize.width])
     useEffect(() => {
         if (user) {
 
@@ -43,7 +39,7 @@ const Login = () => {
     })
     return (
         <>
-            {backgroundsLoaded ?
+            {layoutsLoaded ?
                 <>
 
                     <Header />

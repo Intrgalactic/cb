@@ -38,6 +38,10 @@ export const handleMultipleFiles = (files,setFile,fileTypes,maxFileSize) => {
 }
 
 export const getFileFromBlobUrl = async (requestFile) => {
+    if (typeof(requestFile) === "object") {
+        requestFile = URL.createObjectURL(requestFile);
+    }
+    console.log(requestFile);
     return await fetch(requestFile).then(response => response.blob()).then(blob => {
         const urlParts = requestFile.split('/');
             const fileName = urlParts[urlParts.length - 1];

@@ -69,9 +69,6 @@ export const AxiosFacade = {
             return response.data;
         })
     },
-    getVideoSubtitles: async (formData) => {
-        return await postFetchDB('api/subs-to-video', formData, 200, true);
-    },
     getJwtToken: async () => {
         return await axios.get(`${import.meta.env.VITE_SERVER_FETCH_URL}api/check-auth`, { withCredentials: true }).then(response => {
             return response.data.authenticated;
@@ -102,8 +99,7 @@ export const AxiosFacade = {
             responseType: "blob"
         }
         return await axios.get(`${import.meta.env.VITE_SERVER_FETCH_URL}api/get/${fileName}.${ext}`, config).then(response => {
-            console.log(response.data);
-            console.log(URL.createObjectURL(response.data))
+            return response.data;
         })
     }
 

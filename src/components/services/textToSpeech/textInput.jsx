@@ -1,14 +1,14 @@
 import { forwardRef } from "react";
 import ServiceMainInput from "../../../layouts/dashboard/services/serviceMainInput"
 
-const TextInput = forwardRef((props, ref) => {
+const TextInput = ({setTextInput}) => {
     return (
         <div className="text-input">
             <ServiceMainInput heading="Input Your Text">
-                <textarea ref={ref} type="text" placeholder="This text has been generated with an artificial intelligence..." />
+                <textarea onChange={(e) => {setTextInput(e.target.value)}} type="text" placeholder="This text has been generated with an artificial intelligence..." />
             </ServiceMainInput>
         </div>
     )
-});
+};
 
 export default TextInput;
