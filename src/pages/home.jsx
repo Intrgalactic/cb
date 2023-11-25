@@ -24,16 +24,22 @@ const backgrounds = [
 ];
 
 const Home = () => {
-  const [layoutsLoaded, setLayoutsLoaded] = useState(false);
+  const [layoutsLoaded, setLayoutsLoaded] = useState({
+    mobile: false,
+    medium: false,
+    full: false
+  });
   const windowSize = useWindowSize();
   const prevWindowSize = useRef(windowSize.width);
   const currentLayout = useRef();
 
   useEffect(() => {
-    window.onload = () => {
-      setLayoutsLoaded(true);
+    if (checkWindowSizeChange(windowSize,currentLayout,prevWindowSize) && currentLayout.current !== true) {
+      const backgroundImagesUrls = getBackgroundOnSizeChange(backgrounds, windowSize);
+      loadBackgrounds(setLayoutsLoaded, backgroundImagesUrls,layoutsLoaded,currentLayout.current);
     }
-  }, [setLayoutsLoaded])
+    prevWindowSize.current = windowSize.width;
+  }, [setLayoutsLoaded, windowSize.width])
   return (
     <>
       {layoutsLoaded ?
