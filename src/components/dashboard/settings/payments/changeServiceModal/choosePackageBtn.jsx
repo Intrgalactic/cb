@@ -1,7 +1,8 @@
  
-const ChoosePackageBtn = ({servicePackage}) => {
+const ChoosePackageBtn = ({servicePackage,setService,currentService}) => {
+    console.log(currentService);
     return (
-        <button className="choose-package-btn">
+        <button onClick={() => {setService(servicePackage)}} style={currentService === servicePackage ? {backgroundColor: "var(--blue)"} : {backgroundColor: "#393939"}} className="choose-package-btn">
             {servicePackage}
         </button>
     )

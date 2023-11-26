@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import cross from 'src/assets/images/cross.png';
+import { ServicesContext } from "src/context/settingsServicesContext";
 
 const PaymentDetailModal = ({ modal, visibleModal, serviceName, setVisibleModal }) => {
     const modalRef = useRef();
@@ -10,7 +11,9 @@ const PaymentDetailModal = ({ modal, visibleModal, serviceName, setVisibleModal 
     return (
         <>
             <div className="payment-detail-modal" ref={modalRef}>
-                {modal}
+                <ServicesContext.Provider value={visibleModal}>
+                    {modal}
+                </ServicesContext.Provider>
             </div>
             {visibleModal === serviceName && <img src={cross} alt="cross sign" className="close-modal-cross" onClick={() => { setVisibleModal(false) }} />}
         </>

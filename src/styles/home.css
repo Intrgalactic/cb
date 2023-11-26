@@ -22,7 +22,6 @@ header {
     height: calc(100vh - 70px);
     padding-inline:5vw;
     background-color:black;
-    border-top:2px solid white;
     transform: translateX(240vw);
     transition-duration: 300ms;
     width: 100vw;
