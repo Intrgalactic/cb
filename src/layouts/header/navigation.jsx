@@ -4,7 +4,6 @@ import { useWindowSize } from "@uidotdev/usehooks";
 import MobileNavLinkContainer from "./mobileNavLinkContainer";
 import navIcon from 'src/assets/images/nav-icon.png';
 import { AuthContext } from "src/context/authContext";
-import { AxiosFacade } from "src/lib/axios";
 import { FirebaseFacade } from "src/lib/firebase";
 import { UserSubscriptionContext } from "src/context/userSubscriptionContext";
 
@@ -24,9 +23,6 @@ const Navigation = () => {
     }, {
         href: "/pricing",
         content: "Pricing"
-    }, {
-        href: "/contact",
-        content: "Contact"
     }]
     const [navLinks, setNavLinks] = useState(initialNav)
     useEffect(() => {
@@ -82,10 +78,11 @@ const Navigation = () => {
                     <img src={navIcon} alt="navigation" className="nav-btn" width="35px" onClick={toggleMobileNav} />
                     <nav className="mobile-nav" ref={mobileNav}>
                         {navLinks.map((link, index) => (
-                            <MobileNavLinkContainer href={link.href} content={link.content} key={index} />
+                            <MobileNavLinkContainer href={link.href} content={link.content} key={index} logout={link.logout ? link.logout : false} />
                         ))}
                     </nav>
                 </div> :
+                isMobile === false && 
                 <nav className="desktop-nav">
                     {navLinks.map((link, index) => (
                         <>

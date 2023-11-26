@@ -11,12 +11,12 @@ export const processThirdPartyAuth = (setIsProcessing,navigate,errDispatch,provi
             const user = result.user;
             const additionalInfo = getAdditionalUserInfo(result);
             if (additionalInfo.isNewUser) {
-                await AxiosFacade.createUser(additionalInfo.profile.name, user.displayName, user.email).then(() => {
+                AxiosFacade.createUser(additionalInfo.profile.name, user.displayName, user.email).then(() => {
                     navigate("/choose-package")
                 });
             }
             else {
-                const dbUser = await AxiosFacade.getUser(user.email,true);
+                const dbUser = AxiosFacade.getUser(user.email,true);
                 if (dbUser.isPaying === 'true') {
                     navigate('/dashboard');
                 }

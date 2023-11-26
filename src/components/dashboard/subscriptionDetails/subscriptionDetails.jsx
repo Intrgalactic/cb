@@ -1,9 +1,9 @@
 import { useEffect,useState } from 'react';
-import calendar from 'src/assets/images/icons/gradient-subscription-details/calendar.png';
-import card from 'src/assets/images/icons/gradient-subscription-details/card.png';
-import dollar from 'src/assets/images/icons/gradient-subscription-details/dollar.png';
-import info from 'src/assets/images/icons/gradient-subscription-details/info.png';
-import recur from 'src/assets/images/icons/gradient-subscription-details/recur.png';
+import calendar from 'src/assets/images/icons/gradient-details/calendar.png';
+import card from 'src/assets/images/icons/gradient-details/card.png';
+import dollar from 'src/assets/images/icons/gradient-details/dollar.png';
+import info from 'src/assets/images/icons/gradient-details/info.png';
+import recur from 'src/assets/images/icons/gradient-details/recur.png';
 import SubscriptionDetail from './subscriptionDetail';
 
 const SubscriptionDetails = () => {

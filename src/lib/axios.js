@@ -16,7 +16,7 @@ export const AxiosFacade = {
                 withCredentials: true
             }
         }
-        user = await axios.post(`${import.meta.env.VITE_SERVER_FETCH_URL}get-user`, {
+        user = await axios.post(`${import.meta.env.VITE_SERVER_FETCH_URL}db/get-user`, {
             email: email.toLowerCase(),
             getToken: getJwtToken,
             web: true
@@ -35,7 +35,7 @@ export const AxiosFacade = {
             username: newUsername,
             email: userEmail
         }
-        return await putFetchDB("update-user", body, 204, setIsLoading);
+        return await putFetchDB("db/update-user", body, 204, setIsLoading);
     },
     changeEmail: async (userEmail, newEmail, setIsLoading) => {
         const body = {
@@ -43,7 +43,7 @@ export const AxiosFacade = {
             newEmail: newEmail.toLowerCase(),
             emailChanged: true
         }
-        return await putFetchDB("update-user", body, 204, setIsLoading);
+        return await putFetchDB("db/update-user", body, 204, setIsLoading);
     },
     createUser: async (name, userName, email) => {
         const body = {
@@ -54,18 +54,18 @@ export const AxiosFacade = {
             emailChanged: false,
             web: true
         }
-        return await postFetchDB('create-user', body, 201, false);
+        return await postFetchDB('db/create-user', body, 201, false);
     },
     deleteUser: async (email, password) => {
         const body = {
             email: email.toLowerCase()
         }
         signInWithEmailAndPassword(email, password).then(async () => {
-            return await postFetchDB('delete-user', body, 200);
+            return await postFetchDB('db/delete-user', body, 200);
         })
     },
     getUserCreatedVoices: async (userEmail) => {
-        return await axios.get(`${import.meta.env.VITE_SERVER_FETCH_URL}get-user-voices?email=${userEmail}`).then(async response => {
+        return await axios.get(`${import.meta.env.VITE_SERVER_FETCH_URL}api/get-user-voices?email=${userEmail}`).then(async response => {
             return response.data;
         })
     },
@@ -106,7 +106,7 @@ export const AxiosFacade = {
 }
 
 async function postFetchDB(endpoint, body, successCode, hasBody,reqConfig) {
-    if (endpoint === "create-user") {
+    if (endpoint === "db/create-user") {
         var authConfig = {
             ...config,
             withCredentials: true,

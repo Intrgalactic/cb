@@ -17,6 +17,8 @@ import SpeechToText from "./pages/dashboard/services/speechToText/speechToText"
 import VoiceCloning from "./pages/dashboard/services/voiceCloning/voiceCloning"
 import SubtitlesFromVideo from "./pages/dashboard/services/subtitlesFromVideo/subtitlesFromVIdeo"
 import ImageEnhancer from "./pages/dashboard/services/imageEnhancer/imageEnhancer"
+import NotFound from "./pages/notFound"
+import Settings from "./pages/settings"
 
 const router = createBrowserRouter([
     {
@@ -58,6 +60,14 @@ const router = createBrowserRouter([
     {
         path: "/dashboard/services/image-enhancer",
         element: <ImageEnhancer />
+    },
+    {
+        path: "/dashboard/settings",
+        element: <Settings/>
+    },
+    {
+        path: "/*",
+        element: <NotFound/>
     }
 ])
 
@@ -75,8 +85,9 @@ const App = () => {
 
     onAuthStateChanged(auth, async (user) => {
         if (user) {
+            console.log('user');
             AxiosFacade.getJwtToken().then(async (authenticated) => {
-                console.log(authenticated);
+                console.log(authenticated,'user');
                 if (!authenticated) {
                     setCurrentUser(false);
                 }
@@ -95,6 +106,7 @@ const App = () => {
             })
         }
         else {
+            console.log('user not found');
             setIsPaying(false);
             setCurrentUser(false);
         }

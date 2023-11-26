@@ -1,0 +1,321 @@
+
+.settings {
+    background-color: #0A001F;
+    min-height: 100vh;
+}
+
+.settings-box {
+    border:2px solid #2C233E;
+    border-radius: 10px;
+    padding-inline:5%;
+    color:white;
+    max-height: min-content;
+    box-shadow:  0px 4px 4px rgba(0,0,0,0.25);
+    margin-block:20px;
+    padding-block: 20px;
+}
+
+.settings-panel {
+    padding-top: 110px;
+    padding-inline:5vw;
+    padding-bottom: 30px;
+}
+
+.settings-box__heading h3 {
+    font-family: NexaHeavy;
+    margin-top:0;
+    margin-bottom: 10px;
+}
+
+.settings-box__heading p,.detail__heading p{
+    font-family: NexaRegular;
+}
+
+.detail__heading {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.2em;
+    margin-block:20px;
+}
+
+.detail__heading h5 {
+    margin:0;
+}
+
+.two-step-auth__heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: right;
+}
+.two-step-auth__heading h4,.payment-detail__container__inner h4 {
+    margin-top:0;
+    margin-bottom: 5px;
+    font-family: NexaHeavy;
+}
+.two-step-auth__heading p,.payment-detail__container__inner p {
+    margin:0;
+    font-family: NexaRegular;
+}
+.two-step-auth__heading img {
+    height: 50px;
+    width: auto;
+}
+
+.two-step-auth {
+    display: flex;
+    flex-direction: column;
+    gap:40px;
+}
+
+.settings-btn {
+    width: 200px;
+    border-radius: 5px;
+    box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+    border:0;
+    height: 50px;
+    color:white;
+    font-family: NexaHeavy;
+    font-size: 1.2em;
+}
+.settings-box {
+    position: relative;
+}
+.payment-detail {
+    margin-block:40px;
+}
+.payment-detail__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.payment-detail__container__inner {
+    text-align: right;
+}
+
+.payment-detail__container img {
+    height: 40px;
+    width: auto;
+}
+
+.payment-detail-modal {
+    position: absolute;
+    width: 100%;
+    left:0%;
+    top:0;
+    background-color: black;
+    border-radius: 10px;
+    height: 100%;
+    max-height: 0px;
+    transition-duration: 300ms;
+    opacity: 0;
+    transition-timing-function: ease-in-out;
+    overflow-y: hidden;
+}
+.visible-payment-detail-modal {
+    max-height: 900px;
+    opacity: 1;
+}
+.change-service-modal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    gap:10px;
+}
+.current-service {
+    display: flex;
+    flex-direction: column;
+    align-items: center;  
+    gap:10px;
+}
+.current-service h4 {
+    font-family: NexaHeavy;
+}
+.current-service p {
+    font-family: NexaRegular;
+    background-image: linear-gradient(to right top,#BD00FF,#5500FF);
+    background-clip: text;
+    color:transparent;
+    -webkit-background-clip: text;
+}
+.current-service img {
+    height: 50px;
+    width: auto;
+}
+.current-service p,.current-service h3 {
+    margin:0;
+}
+
+.additional-features {
+    width: 80%;
+}
+.feature {
+    display:flex;
+    text-align: right;
+    font-family: NexaRegular;
+    font-size: 0.9em;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+}
+.feature p {
+    max-width: 80%;
+}
+.feature img {
+    height: 20px;
+    width: auto;
+}
+.feature__tooltip {
+    opacity: 0;
+    transform: scale(0);
+    pointer-events: none;
+    background-color: #0057FF;
+    height:50px;
+    transition-duration: 200ms;
+    transform-origin: right bottom;
+    width: 230px;
+    font-size: 0.8em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-family: NexaHeavy;
+    border-radius: 10px;
+    position: absolute;
+    right:0;
+    top:-50px;
+}
+.feature:hover .feature__tooltip {
+    opacity: 1;
+    transform: scale(1);
+}
+.main-choose-package-btn {
+    width: 240px;
+    height: 60px;
+    min-height: 60px;
+    background-color: var(--blue);
+    border-radius: 5px;
+    border:none;
+    box-shadow:  0px 4px 4px rgba(0,0,0,0.25);
+    font-family: NexaHeavy;
+    font-size: 1.1em;
+    color:white;
+}
+.change-service-modal__packages {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    row-gap: 10px;
+    max-width: 250px;
+}
+.choose-package-btn {
+    height: 50px;
+    background-color: #393939;
+    border-radius: 5px;
+    border:none;
+    color:white;
+    font-family: NexaHeavy;
+    width: 240px;
+    margin:0;
+    background-size: cover;
+    background-position: bottom;
+    transition-duration: 50ms;
+    transition-property: background;
+    transition-timing-function: ease-out;
+    font-size: 1.1em;
+}
+.choose-package-btn:last-of-type {
+    background-image: url('src/assets/images/diamond-btn.png');
+}
+.choose-package-btn:first-of-type {
+    background-image: url('src/assets/images/platinium-btn.png');
+}
+.choose-package-btn:hover {
+    background-position: top;
+}
+.manage-payment-detail {
+    display: flex;
+    justify-content: space-between;
+}
+
+.payment-details .payment-details__container:nth-child(odd) .manage-payment-detail .settings-btn {
+    width: 100%;
+}
+.payment-details {
+    padding-block: 40px;
+}
+.close-modal-cross {
+    position: absolute;
+    top:-15px;
+    right: -15px;
+    z-index: 999;
+    cursor: pointer;
+    width: 30px;
+}
+.feature-higlight {
+    background-image: linear-gradient(to bottom,#DBFF00,#0DFF09);
+    color:transparent;
+    font-family: NexaHeavy;
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+@media screen and (min-width:650px) {
+    .settings-box__heading h3 {
+        font-size: 1.5em;
+    }
+    .two-step-auth__heading h4,.payment-detail__container__inner h4 {
+        font-size: 1.3em;
+    }
+    .two-step-auth__heading p, .payment-detail__container__inner p {
+        font-size: 1.2em;
+    }
+    .settings-box__heading p {
+        font-size: 1.2em;
+    }
+    .change-service-modal__packages {
+        flex-direction: row;
+    }
+    .feature {
+        font-size: 1.2em;
+    }
+    .feature img {
+        height: 30px;
+    }
+    .current-service h3 {
+        font-size: 2em;
+    }
+    .current-service p {
+        font-size: 1.5em;
+    }
+    .change-service-modal__packages {
+        width: 80%;
+        justify-content: space-between;
+        max-width: 80%;
+    }
+    .choose-package-btn {
+        width: 200px;
+    }
+}
+
+@media screen and (min-width:1024px) {
+    .settings-panel {
+        flex-direction: row;
+        padding-inline:0;
+        flex-wrap: wrap;
+        padding-top: 30px;
+        align-items: flex-start;
+        column-gap:40px;
+        padding-left:calc(clamp(200px,20vw,500px) + 40px);
+        margin-inline:40px;
+        display: flex;
+        justify-content: center;
+    }
+    .settings-box {
+        width: 50vw;
+        max-width: 500px;
+    }
+}

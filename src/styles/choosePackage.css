@@ -75,6 +75,9 @@
     border-radius: 15px;
     height: calc(100% - 6px);
 }
+.video-service-preview {
+    margin-bottom: 20px;
+}
 .play-video-btn {
     appearance: none;
     -webkit-appearance: none;
