@@ -263,6 +263,8 @@
     color:transparent;
     font-family: NexaHeavy;
     -webkit-background-clip: text;
+    display: inline-block;
+    min-width: 60px;
     background-clip: text;
 }
 @media screen and (min-width:650px) {
