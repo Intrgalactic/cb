@@ -1,4 +1,4 @@
-import benefitCheck from 'src/assets/images/register-check.png'
+import benefitCheck from 'src/assets/images/gradient-check.png'
 
 const RegisterBenefit = ({content}) => {
     return (
