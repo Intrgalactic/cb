@@ -3,7 +3,7 @@ import VoiceSample from "./voiceSampleBtn";
 
 const VoiceBox = memo(function VoiceBox({ voice, setSelectedVoice, selectedVoice }) {
     const selectVoice = () => {
-        setSelectedVoice(voice)
+        voice === selectedVoice ? setSelectedVoice({}) : setSelectedVoice(voice);
     }
     return (
         <div className="voice-box">

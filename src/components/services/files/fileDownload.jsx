@@ -1,4 +1,6 @@
 import loader from 'src/assets/images/loader.png';
+import downloadFileImg from 'src/assets/images/file-download.png';
+import { useRef } from 'react';
 
 const FileDownload = ({fileToDownload,fileToDownloadExtension}) => {
     const handleDownload = () => {
@@ -13,6 +15,10 @@ const FileDownload = ({fileToDownload,fileToDownloadExtension}) => {
 
         URL.revokeObjectURL(url);
     };
+    const fileImgRef = useRef();
+    const transformFileImg = () => {
+        fileImgRef.current.classList.toggle("active-download-file-img");
+    }
     return (
         <div className="file-download">
             <p className="input-heading">File To Download</p>
@@ -24,8 +30,9 @@ const FileDownload = ({fileToDownload,fileToDownloadExtension}) => {
                     </>
                     : 
                     <>
+                        <img src={downloadFileImg} alt="file" className='download-file-img' ref={fileImgRef}/>
                         <p>Download Your File</p>
-                        <button onClick={handleDownload} className='download-file-buton'>Download</button>
+                        <button onClick={handleDownload} className='download-file-button' onMouseOut={transformFileImg} onMouseOver={transformFileImg}>Download</button>
                     </>
                 }
             </div>

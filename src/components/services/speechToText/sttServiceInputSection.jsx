@@ -9,6 +9,7 @@ import { processModals } from "src/utilities/utils";
 import { SessionStorage } from "src/utilities/sessionStorage";
 import { getFileFromBlobUrl } from "src/utilities/files";
 import { fetchService, removeServiceVariables } from "src/utilities/services";
+import Output from "./output/output";
 
 const STTServiceInputSection = memo(() => {
     const STTInitialState = {
@@ -17,11 +18,11 @@ const STTServiceInputSection = memo(() => {
         file: undefined,
         type: "Audio",
         fileToDownload: undefined,
-        fileToDownloadExtension: undefined
+        fileToDownloadExtension: undefined,
+        outputData: undefined
     }
 
     const STTReducer = (state, action) => {
-        console.log(action);
         for (const key of Object.keys(STTInitialState)) {
             if (key === action.type) {
                 return { ...state, [key]: action.payload };
@@ -39,21 +40,26 @@ const STTServiceInputSection = memo(() => {
         recordings.push(file);
         STTDispatch({type:"recordingFiles",payload: recordings});
     }
+    const removeRecordingFile = () => {
+
+    }
     const getQueryResponse = async () => {
+        const output = SessionStorage.getData("Output") !== null ? SessionStorage.getData("Output").toLowerCase() : "txt";
         const reqBody = {
             languageCode: 'English',
             summarizeOn: SessionStorage.getData("Summarization") || "Disable",
             topicsOn: SessionStorage.getData("Topics") || "Disable",
             diarizeOn: SessionStorage.getData("Diarization") || "Disable",
-            audioEncoding: SessionStorage.getData("Output") || "txt",
+            audioEncoding: output,
             subtitlesOn: SessionStorage.getData("Timestamps") || "Disable",
             punctuation: SessionStorage.getData("Punctuation") || "Enable"
         }
+       
         STTState.selectedRecordingFile ? Object.assign(reqBody,{file: STTState.recordingFiles[STTState.selectedRecordingFile]}) : 
         STTState.recordingFiles ? Object.assign(reqBody,{file: STTState.recordingFiles[0]}) : Object.assign(reqBody,{file: STTState.file[0]});
         setIsProcessing(true);
         reqBody.file = await getFileFromBlobUrl(reqBody.file);
-        await fetchService(reqBody,"api/speech-to-text",setIsProcessing,SessionStorage.getData("Output") ? SessionStorage.getData("Output").toLowerCase() : "txt",STTDispatch,abortRef);
+        await fetchService(reqBody,"api/speech-to-text",setIsProcessing,output,STTDispatch,abortRef,true,true);
     }
     const cancelRequest = () => {
         abortRef.current.abort();
@@ -120,6 +126,7 @@ const STTServiceInputSection = memo(() => {
                     setFile={setFile}
                 />
             </ServiceInputSection>
+            {STTState.outputData && <Output outputData={STTState.outputData}/>}
             <ProcessBtn enabled={STTState.recordingFiles !== undefined || STTState.file !== undefined} btnText="Transcribe" process={getQueryResponse} />
             <OptionsSelectSection heading="Speech To Text Options" categoriesRows={categoriesRows}/>
             {isProcessing === true && <ProcessModal cancel={cancelRequest} processObj={processModals.speechToText}/>}

@@ -111,6 +111,7 @@ const App = () => {
             setCurrentUser(false);
         }
     })
+
     return (
         <AuthContext.Provider value={currentUser}>
             <UserSubscriptionContext.Provider value={isPaying}>

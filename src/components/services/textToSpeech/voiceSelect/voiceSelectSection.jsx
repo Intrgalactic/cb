@@ -34,6 +34,7 @@ const VoiceSelectSection = () => {
             setFilteredVoices(filteredVisibleVoices);
         }
     }, [voiceSearchFilter])
+
     return (
         <div className="voice-select-section">
             <div className="voice-select-section__input__container">

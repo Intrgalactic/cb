@@ -10,8 +10,7 @@ const VoiceSample = ({name}) => {
     const getVoicePreviewUrl = async () => {
         setIsFetching(true);
         await AxiosFacade.getServiceFile(encodeURIComponent(`voicesPreviews/${name}`), "mp3").then((blob) => {
-            ;
-            setVoicePreviewUrl(blob);
+            setVoicePreviewUrl(URL.createObjectURL(blob));
             setIsFetching(false);
         }).catch(err => {
             setVoicePreviewUrl(false);

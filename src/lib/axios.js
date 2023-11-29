@@ -101,6 +101,13 @@ export const AxiosFacade = {
         return await axios.get(`${import.meta.env.VITE_SERVER_FETCH_URL}api/get/${fileName}.${ext}`, config).then(response => {
             return response.data;
         })
+    },
+    removeUserVoice: async (voiceId) => {
+        const body = {
+            voiceId:voiceId,
+        }
+
+        return await deleteFetchDB("api/user-voice",body,200);
     }
 
 }
@@ -132,5 +139,12 @@ async function putFetchDB(endpoint, body, successCode, setIsLoading) {
     }
     else {
         throw new Error("Request Failed");
+    }
+}
+
+async function deleteFetchDB(endpoint,body,successCode) {
+    const response = await axios.delete(`${import.meta.env.VITE_SERVER_FETCH_URL}${endpoint}`,{params: {...body}},config);
+    if (response.status === successCode) {
+        return true;
     }
 }

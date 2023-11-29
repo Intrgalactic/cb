@@ -13,7 +13,7 @@ const AudioServicePreview = ({ alt, img, heading, subHeading, width, height, src
     const [duration, setDuration] = useState(0);
     const [currentTime, setCurrentTime] = useState("00:00");
     const [isPlaying, setIsPlaying] = useState();
-    const [isDragging,setIsDragging] = useState(); 
+    const [isDragging, setIsDragging] = useState();
     useEffect(() => {
         if (audio.current) {
             audio.current.addEventListener('loadedmetadata', function () {
@@ -95,11 +95,11 @@ const AudioServicePreview = ({ alt, img, heading, subHeading, width, height, src
                             onMouseDown={handleMouseDown}
                             onMouseMove={handleMouseMove}
                             onMouseUp={handleMouseUp}
-                            onMouseLeave={handleMouseUp} 
+                            onMouseLeave={handleMouseUp}
                         >
                             <div className="progress" ref={progressBar}></div>
                         </div>
-                        <button className="video-btn" ref={playPauseBtn} onClick={togglePlayPause}><img src={isPlaying ? pause : play} width="25px" height="25px" alt={isPlaying ? "pause button" : "play button"}/></button>
+                        <button className="video-btn" ref={playPauseBtn} onClick={togglePlayPause}><img src={isPlaying ? pause : play} width="25px" height="25px" alt={isPlaying ? "pause button" : "play button"} /></button>
                         <p className="current-time">{currentTime}</p><br />
                         <p className="duration">{duration}</p>
                     </div>

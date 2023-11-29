@@ -1,4 +1,4 @@
-import { memo, useReducer, useRef, useState } from "react";
+import { memo, useContext, useEffect, useReducer, useRef, useState } from "react";
 import ServiceInputSection from "src/layouts/dashboard/services/serviceInputSection";
 import TextInput from "./textInput";
 import FileInputSection from "../files/fileInputSection";
@@ -7,9 +7,10 @@ import VoiceSelectSection from "./voiceSelect/voiceSelectSection";
 import VoiceSlidersSection from "./voiceSliders/voiceSlidersSection";
 import ProcessModal from "../process/processModal";
 import { processModals } from "src/utilities/utils";
-import axios from "axios";
 import { SessionStorage } from "src/utilities/sessionStorage";
 import { fetchService } from "src/utilities/services";
+import ClonedVoiceSelect from "./clonedVoiceSelect/clonedVoiceSelect";
+import Speech from "./output/speechOutput";
 
 const TTSServiceInputSection = memo(() => {
     const TTSInitialState = {
@@ -17,8 +18,8 @@ const TTSServiceInputSection = memo(() => {
         type: "Text",
         serviceName: "text-to-speech",
         fileToDownload: undefined,
+        fileToDownloadExtension:undefined,
     }
-
     const TTSReducer = (state, action) => {
         for (const key of Object.keys(TTSInitialState)) {
             if (key === action.type) {
@@ -38,20 +39,16 @@ const TTSServiceInputSection = memo(() => {
         abortRef.current = abortController;
         const clarity = SessionStorage.getData("clarity");
         const stability = SessionStorage.getData("stability");
-        const selectedVoice = SessionStorage.getData("selected-voice");
+        const selectedVoice = SessionStorage.getData("selected-cloned-voice") || SessionStorage.getData("selected-voice");
         const reqBody = {
-            stability: stability || 0.5,
-            clarity: clarity || 0.5,
-            voiceId: selectedVoice.id || "2FoKHH8o86E11irdyftL"
+            stability: stability ? stability.slice(0,stability.indexOf("%")) / 100 : 0.5,
+            clarity: clarity ? clarity.slice(0,clarity.indexOf("%")) / 100 : 0.5,
+            voiceId: selectedVoice ? selectedVoice.id : "7ZIvfjMYoK9ZHYqgjT9Z"
         }
         TTSState.file ? Object.assign(reqBody,{file:TTSState.file}) : Object.assign(reqBody,{text: textInput});
         setIsProcessing(true);
-        const formData = new FormData();
-        for (const [key,value] of Object.entries(reqBody)) {
-            formData.append([key],value);
-        }
 
-        await fetchService(formData,"api/text-to-speech",setIsProcessing,"mp3",TTSDispatch,abortRef);
+        await fetchService(reqBody,"api/text-to-speech",setIsProcessing,"mp3",TTSDispatch,abortRef,true);
     }
     const cancelRequest = () => {
         abortRef.current.abort();
@@ -71,12 +68,15 @@ const TTSServiceInputSection = memo(() => {
                     fileTypes={fileTypes}
                     type={TTSState.type}
                     files={TTSState.file}
+                    fileToDownloadExtension={TTSState.fileToDownloadExtension}
                     serviceName={TTSState.serviceName}
                     fileToDownload={TTSState.fileToDownload}
                     setFile={setFile}
                 />
             </ServiceInputSection>
+            {TTSState.fileToDownload && <Speech file={TTSState.fileToDownload} />}
             <VoiceSlidersSection/>
+            <ClonedVoiceSelect/>
             <ProcessBtn enabled={textInput !== "" || TTSState.file !== undefined} btnText="Synthesize" process={getQueryResponse} />
             <VoiceSelectSection/>
             {isProcessing === true && <ProcessModal processObj={processModals.textToSpeech} cancel={cancelRequest}/>}

@@ -14,7 +14,7 @@ const FilesList = ({ files, deleteFile }) => {
                     }
                 </> :
                 <>
-                    <p className="voice-sample-msg">Add Your Voice Samples <br/> Up To 20 Files (Up To 20 Mb)</p>
+                    <p className="voice-sample-msg">Add Your Voice Samples <br/> Up To 20 Files (Up To 20 Mb Each)</p>
                 </>
                     }
             </div>

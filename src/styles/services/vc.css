@@ -24,3 +24,27 @@
     font-family: NexaHeavy;
     box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
 }
+
+.voice-name-input {
+    width: 100%;
+    font-family: NexaHeavy;
+    color:white;
+}
+
+.voice-name-input input {
+    width: clamp(250px,30vw,300px);
+    height: 40px;
+    background-color: rgba(0,0,0,0.1);
+    border:2px solid #2C233E;
+    box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+    border-radius: 5px;
+    padding-inline:20px;
+    font-family: NexaHeavy;
+    color:white;
+}
+
+.voice-name-input input::placeholder {
+    color:white;
+    opacity: 1;
+    font-family: NexaHeavy;
+}
